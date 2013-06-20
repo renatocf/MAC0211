@@ -1,0 +1,109 @@
+BASH
+
+* É o shell padrão do GNU/Linux
+* É um sucessor evoluído do sh (e muito compatível com ele)
+* Incorpora características do 'csh' e do 'ksh'
+* Implementa as normas POSIX (para a portabilidade entre sis-
+  temas operacionais).
+  - Se um programa for implementado respeitando o POSIX, te-
+    mos grande chance de conseguir portar os sistemas (as 
+    chamadas do Kernel têm o mesmo formato, mesmo entre o
+    Linux e o Windows).
+* Assim como os demais 'shells' no Unix, o bash combina duas 
+  funcionalidades: 
+  - intepretador de comandos
+  - linguagem de programação
+* Funcona de dois modos: interativo (executa comandos do prompt)
+                         não-interativo (executa comandos lidos 
+                         de um arquivo de entrada) - script
+
+A LINGUAGEM DE PROGRAMAÇÃO DO BASH
+
+* O interpretador de comanntos permite que usuários executem pro-
+  gramas utilitários
+    Os 'programs utilitários' são os programas, além das funções
+    mais básicas do kernel, que auxiliam no desenvolvimento bá-
+    sico do sistema. O projeto GNU constrói muitos destes progra-
+    mas, sendo que eles vêm juntos com o Kernel do Linux para for-
+    mar o SO.
+    Cada shell têm seus comandos nativos, mas os shells podem ter
+    os mesmos utilitários.
+* A linguagem de programação permite que os utilitários sejam com-
+  binados
+* SCRIPTS (= arquivos contendo comandos) podem ser criados, e esses
+  arquivos têm status de novos comandos
+* 'Scripts' possibilitam que usuários personalizem seus ambients,
+  criando novos comandos para automatizar suas tarefas rotineiras
+  de manutenção e otimização do funcuinamento do computador.
+
+FUNCIONAMENTO BÁSICO DO SHELL
+
+Um shell gerencia a interação usuário/SO:
+1 - guarda a entrada de uma ou mais linhas de comando (que podem
+    ser difirados pelo usuário no terminal ou então lidos de um
+    arquivo, chamado de 'script');
+2 - INTERPRETA uma linha por vez, traduzindo-a em chamadas de comandos
+    existentes no SHELL ou no SO;
+    - Diferentemente da compilação, que gera um único executável que
+      pode ser gerado várias vezes, a INTERPRETAÇÃO não gera uma ver-
+      são: toda vez que roda, um comando é passado para linguagem de
+      montagem e interpretado quantas vezes necessário.
+3 - cria processos-filhos para executar os comandos requisitados
+4 - espera que a execução dos processos criados termine;
+5 - disponibiliza o resultado da execução (para o usuário ou para
+    outro programa);
+6 - volta ao passo inicial.
+
+UTILITÁRIOS PARA MANIPULAÇÃO DE DIRETÓRIOS
+
+* ls     <opções> <diretório>
+* cd    <diretório>
+* mkdir <opções> <nome>
+* rmdir <opções> <diretório>
+* cp    <opções> <origem> <destino>
+* mv    <opções> <origem> <destino>
+* rm    <opções> <arquivos>
+* cat   <arquivo(s)>
+* find  -name <arquivo>
+* sort  <arquivo>
+* pwd   
+
+OUTROS UTILITÁRIOS MUITO USADOS
+* more  <opções> <arquivos>
+* less  <opções> <arquivo>
+* grep  <opções> <padrão> <arquivo>
+* ps    <opções>
+* top   <opções>
+* kill  <opções> <ID do processo>
+
+OPERADORES BASH PARA REDIRECIONAMENTO
+
+* > 
+    Redireiona a saída de um comando para arquivo em disco.
+    Se o arquivo existir, será sobrescrito.
+* >> 
+    Redireciona a saída, mas concatenando-as ao final do arquivo
+* <
+    Redireciona a entrada
+* 2>
+    Redireciona a saída de erros
+* &>
+    Redireciona as duas saídas
+* |
+    PIPE: redireciona a saída de um programa para a entrada de outro.
+    A sequência de redirecionamentos é chamado de PIPELINE.
+
+    /dev/null - saída especial que destroi o que é enviado para ela
+
+
+OUTROS TIPOS DE EXECUÇÃO DE COMANDOS EM BASH
+    
+* Execução em background: faz com que o comando seja executado assin-
+  crinicamente, em um subshell. Em uma execução em background, o sehll
+  não espera que a execução co comando disparado termine. É feita quan-
+  do o caracter de controle '&' é usado no final do comando. Ex:
+    sort mac211.txt > saida.txt &
+
+* Execução sequencial: comandos separados por ';' são executados 
+  sequencialmente. Exemplo:
+    sort mac211.txt > saida.txt ; cat saida.txt

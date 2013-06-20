@@ -1,0 +1,15 @@
+Para criarmos programas usando o GCC, devemos colocar alguma função como
+'main'. Por outro lado, ao usarmos apenas o LD, devemos colocar o início
+do programa como 'start'
+
+global main  <- GCC
+global start <- LD
+
+Acessando argumentos da linha de comando (argc e argv)
+
+|  EIP   | 4 bytes <- EIP (início da pilha)
+|  argc  | 4 bytes <- número de argumentos
+| "prog" | 4 bytes <- nome do programa
+|  "1"   | 4 bytes <- 1º argumento do programa
+|  "2"   | 4 bytes 
+|  "3"   | 4 bytes 

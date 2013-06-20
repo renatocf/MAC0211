@@ -1,0 +1,60 @@
+* No Unix e seus derivados, um 'stream' é um fluxo de dados (bytes
+  ou caracteres) que pode ser tanto a entrada quanto a saída de um
+  programa.
+* No fluxo de dados, os dados são acessados sequencialmente, um a um
+* Todo processo tem ao menos três streams, os chamados:
+    streams de E/S padrão: 0 - Entrada padrão
+                           1 - Saída padrão
+                           2 - Saída de erros
+
+-----------------------------------------------------------------------
+STREAMS em C
+
+* Antes de poder ler ou escrever em um arquivo, e preciso estavelecer
+  com ele uma conexão (ou canal de comunucação). Isso é feito na
+  abertura do arquivo.
+* Existem dois mecanismos diferentes para representar conexões com
+  arquivos: os DESCRITORES DE ARQUIVOS (tipo int) e os 'streams' (ob-
+  jetos do tipo FILE*)
+* Conjunto de função que realizam operações de escrita e leitura é muito
+  mais rico e poderoso para 'streams'. (FILE guarda muito mais informa-
+  ções sobre o arquivo, inclusive dados sobre o estado de leitura/escrita).
+* Para descritores de arquivos, as funções se limitam a transferência
+  de blocos de dados.
+* Para streams, existem funções para a leitura e a escrita formatada 
+  (printf e scanf), alé de funções específicas para a leitura e escrita
+  de caracteres e strings (fgetc, fputs, getline, etc).
+
+-----------------------------------------------------------------------
+PIPES - mais detalhes
+
+* Pipes: dependem da convenção de que todo programa tem inicialmente 
+  disponível para si (pelo menos) dois streams de E/X: a entrada pa-
+  drão e a saída padrão.
+* A operação de 'pipe' conecta a saída padrão de um preograma à entra-
+  da padrão de outro. A cadeia de proframas conectadas desta forma é
+  chamsda de pipeline.
+* Pipes são um mecanismo de comunicação inter-programas e processos.
+  (Isso e muito útil como instrumento de padronização de comuncação)
+
+-----------------------------------------------------------------------
+FILTROS
+
+* Ao implementar programas de modo que eles possam 'conversar' entre
+  si, evitamos a necessidade de implementar sistemas monolíticos (de-
+  masiadamente intrincados)
+* A tradição Unix encoraja o desenvolvimento de programas que leiam e
+  escrevam dados textuais sequencialmente, em dormatos independentes 
+  de dispositivos.
+* Muitos programas do  Unix e seus derivados são implementados como
+  'filtros' simples, que recebem como entrada um 'stream' de texto e 
+  processa-o, gerando um outro 'stream' de texto como saída.
+* Faz parte da filosofia do Unix tentar implementar dados na forma de
+  filtros, pois isto é muito útil para que possamos criar diferentes
+  formas de comunicação entre programas, e inclusive interligá-los de
+  maneira muito simples.
+* Exemplos: 'cat', 'grep', 'wc', ...
+
+    "This is the Unix philosophy: Write programs that do one thing 
+    and do it well. Erite programs to work together. Write programs 
+    to handle text strings."

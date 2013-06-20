@@ -1,0 +1,105 @@
+ESTRUTURA GERAL DAS INSTRUÇÕES
+
+    * rótulo (label): "nomeia" os blocos do programa. São usados
+      nos saltos. Devem ser alfanuméricos começando por letras
+    * mnemônico: especifica uma instrução (ex: MOV, ADD)
+    * operando(s): objeto(s) sobre o(s) qual(is) a instrução opera.
+                   Quando umas intrução possui mais de um operando,
+                   eles devem ser separados por vírgula.
+    * comentários: especialmente importantes, pois os programas são
+                   pouco legíveis.
+
+    Exemplo:
+    [Rótulo] [Mnemônico]    [operando] [;COmentário]
+                MOV         CX,5        ; inicializa contador
+    início      MOV         AX,25h      ; inicializa AX com 25h
+                ADD         AX,AX       ; soma Ax
+                DEC         CX          ; 
+                JNZ         inicio      
+
+COMANDO PARA TRANSFERÊNCIA DE DADOS: MOV
+
+    Formatos: MOV reg, reg/mem/const ; registrador p/ mememória, cons-
+                                     ; tante ou registrador
+              MOV mem, reg/const     ; da memória para um registrador
+                                     ; ou uma constante
+
+    reg   - registrador
+    mem   - posiçaõ da memória (pode ser indicada por uma constante, 
+            como [1000], ou por meio de um registrador, como [EBX], 
+            que armazena a posiçaõ de memória no registrados)
+    const - valor constante
+
+    Exemplos:
+    Correto:           | Incorreto
+    MOV AH,-14         | MOV AL,999       ; 999 não cabe em 8 bits
+    MOV AX,16H         | 
+    MOV AL,'A'         | MOV EBX,DX       ; não possuem o mesmo tamanho
+    MOV EAX,EBX        | 
+    MOV BX,1000        | 
+    MOV AX,[EBX]       |  
+    MOV AX,[1000]      |   
+    MOV AX,[EBX+1000]  | 
+    MOV [1000],AX      | MOV [1000],[EBX] ; não há MOV direto entre 
+    MOV [1000],36H     |                  ; as memórias
+
+    Números normais são decimais. Com 'H' no final, hexadecimais.
+    Os processadores mais novos também aceitam caracteres (entre aspas)
+    Ao mover entre registradores de tamanhos diferentes, temos de 
+    usar alguns truques:
+    
+    Inicializamos o BL com um valor (BL <- 8)
+    Queremos mover o BL para o AX.
+    Podemos inicializar o BH com 0  (BH <- 0)
+    E então fazer MOV BX,AX
+    Pois o BX é a junção de BH com BL.
+
+MEMÓRIA COMO OPERANDO
+
+    * Casos de não ambiguidade no tamanho
+    Acontece quando a instrução envolve um operando do tipo 'mem' e
+    outro do tipo 'reg'.
+    Neste caso o número de palavras manipuladas na memória é deter-
+    minada pelo tamanho de 'reg'
+    Exemplo: a instrução
+        MOV AX,[1000]
+        copia 2 paravras da memória (pois AX tem 16 bits).
+
+    * Casos de ambiguidade no tamanho
+    Acontecem quando as intrução envolte um operando do tipo 'mem'
+    e outro do tipo 'const'. Exemplo:
+    MOV [EBX], 5
+    Usamos um tipo de conversor para garantir o tamanho:
+    MOV BYTE[EBX], 5  ;BYTE: 1 palavra para a constante (8 bits)
+    MOV WORD[EBX], 5  ;WORD: 2 palavras para a constante (16 bits)
+    MOV DWORD[EBX], 5 ;DWORD: 4 palavras para a constante (32 bits)
+
+    * Soluções para problemas de ambiguidade
+    - Ex: 50 pode ser um número em notação decimal e haxadecimal
+    - Solução: usar sufixos que determinam: decimal D, hexadecimal H,
+      binário B
+    - Isso cria um novo problema: AH, BH, CH, DH são números hexade-
+      cimais, mas são nomes de registradores;
+    - Solução: na linguagem de montagem, fazer com que todos os números
+      hexadecimais sejam também iniciados por um dígito (0 .. 9)
+      Ex: para falar do hexadecimal AH, usamos 0AH
+
+    Em geral, o primeiro argumento é o destino, o segundo, os
+    argumentos de entrada.
+
+COMANDO PARA TROCA DE DADOS: XCGH
+    Troca vaores dos operandos
+    XCGH reg, reg/mem
+    XCGH mem, reg
+
+COMANDO PARA SOMA: ADD
+    ADD reg,reg/mem/const
+
+COMANDO PARA SUBTRAÇÃO: SUB
+    SUB reg,reg/mem/const
+
+COMANDO PARA INCREMENTO/DECREMENTO: INC/DEC
+    INC reg/mem <--> ADD reg/mem,1
+    DEC reg/mem <--> SUB reg/mem,1
+    A diferença comparado a este programa é que INC/DEC são
+    um pouco mais rápidos, no geral

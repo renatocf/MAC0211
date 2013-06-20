@@ -1,0 +1,25 @@
+|-----------|
+|   temp3   | <- esp      Acessamos como [EBP[2]+temp3]
+|-----------|
+|   temp2   | 2 bytes     Acessamos como [EBP[2]+temp2]
+|-----------|
+|   temp1   | 2 bytes     Acessamos como [EBP[2]+temp1]
+|-----------|
+|    (DX)   | 2 bytes
+|-----------|
+|           |
+|   EBP(1)  | 4 bytes <-- EBP(2)
+|-----------|             Criamos uma 'nova pilha' para a função 
+|           |             Ela serve porque ESP fica mudando de lugar 
+|    EIP    | 4 bytes     (e isso não ajuda).
+|-----------|
+|   10(A)   | 2 bytes     Acessamos como [EBP[2]+A]
+|-----------|           
+|   20(B)   | 2 bytes     Acessamos como [EBP[2]+B]
+|-----------|           
+|    5(C)   | 2 bytes     Acessamos como [EBP[2]+C]
+|-----------|
+|    ...    |
+|-----------|
+|           | EPB(1) - base da pilha inicialmente
+|-----------|

@@ -1,0 +1,39 @@
+FLEX - Fast Lexical Analyzer Generator
+--------------------------------------
+
+É uma ferramenta que facilita a criação de analisadores léxicos.
+Os analisadores são bons para podermos pegar opções conforme a 
+nossa necessidade (opções para o programa).
+
+* Implementação gratuíta e de código aberto Lex
+* Distribuído pelo projeto GNU, mas não é parte dele
+* ENTRADA: arquivo contendo uma tabela de expressões regulares
+           e suas respectivas ações associadas (funciona próxi-
+           mo da forma do AWK)
+* SAÍDA  : o código donte em C de um analisadr léxico que reco-
+           nhece as expressões regulares especificadas no arquivo
+           de entrada.
+
+FORMATOR DE ARQUIVO
+
+Dividido em 3 partes, começadas por %%
+
+    [Definições]
+    %%
+    [Regras]
+    %%
+    [Código do usuário]
+
+    DEFINIÇÕES [Parte do início]
+    
+    A seção 'definições' pode conter:
+    * código "literal":
+      que deve aparecer no analisador fora de qualquer função. 
+      Esse código deve ser limitaro por %{ %} ou então deve 
+      aparecer identado
+    * delacações de DEFINIÇÕES DE NOMES SIMPLES;
+      São feitas no formato [nome] [definição]
+      Ex:
+      DIGITOS       [0-9]
+      IDENTIFICADOR [a-z][a-z0-9]*
+    * CONDIÇÕES DE INÍCIO para regras adicionais ou exclusivas

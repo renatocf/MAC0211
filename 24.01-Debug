@@ -1,0 +1,75 @@
+MENSAGENS DE DEPURAÇÃO
+
+    Colocando mensagens de Depuração no Código:
+
+    #define DEBUG 1
+    #ifdef DEBUG
+        #define printDebug(msg) fprint(stderr, "%s\n", msg)
+    #elif
+        #define printDebug(msg)
+    #endif
+
+    É uma forma elegante de poder colocar o programa em modo debug.
+
+CÓDIGO AUTO-DEPURANTE
+
+    void check(char *msg)
+    {
+        if(v1 > v2)
+        {
+            printf("%s: v1=%d v2=%d\n", msg, v1, v2);
+            fflush(stdout);
+            Abort(); /* Terminação anormal */
+        }
+    }
+
+    ...
+    check("antes do suspeito");
+    /* código suspeito */
+    check("depois do suspeito");
+    
+    Depois de achar o erro, não apague as chamadas ao 'check()',
+    coloque-as entre comentários. (pelo menos por algum tempo,
+    aspectos seria a solução elegante).
+    
+    Se as chamadas não fazem com que o programa fique lento, deixe-as.
+
+ARQUIVOS DE LOG
+    * Quando houver problemas no programa, o log é a 'prova do crime'
+    * Dê uma olhada no final do log e vá subindo.
+    * Não imprima o log: use ferramentas para vasculhá-lo (grep, diff)
+    * Cuidado com o 'buffering' em streams:
+        * Para desabilitar o buffering: setbuf(fp, NULL);
+        * É default em 'stderr', 'cerr', 'System.err'
+        * Isso evita que não se imprima o que estava no buffer por
+          causa de algum erro, como segmentation fault. Essa ação 
+          já é padrão em saídas de erro.
+    * Quando a saída é muito extensa, é difícil analisá-la sozinhos.
+
+FERRAMENTAS PARA DEBUG DE ERROS
+    * grep, diff, gnuplot, shell scripts, svn, gcc, -Wall, strings, etc.
+    * STRINGS: é um programa que consegue extrair as strings imprimíveis
+               dentro do executável.
+    * Se a caça a um erro está sndo muito demorada, vá anotando todas as
+      possibilidades que você está tentando.
+    * Quando localizar o erro, se for o caso, anote a solução em uma
+      wiki.
+
+FERRAMENTAS PARA MONITORAMENTO DE MEMÓRIA
+    * Valgrind( para Linux)
+
+ÚLTIMO CASO
+    * Se tudo falhar, aí será uma boa opção utilizar um depurador.
+
+DEPURANDO CÓDIGO DOS OUTROS
+    * É bom rodar com o depurador, para que acompanhemos linha a linha
+
+UM BOM RELATÓRIO DE ERROS
+    * Versão do programa e linha de comando
+    * Sistema operacional e versão
+    * Compilador e versão
+    * Versão das bilbiotecas (se relevante).
+    * Uma pequena entrada que gera o erro.
+    * Uma descrição do erro.
+    * Se possível, a linha de código errada.
+    * Se possível, a correção.

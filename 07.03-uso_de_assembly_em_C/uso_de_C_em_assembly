@@ -1,0 +1,8 @@
+Vamos supor que queiramos usar o 'c' no assembly (por meio de uma função
+como o printf)
+
+Temos de compilar o .o (para usar o NASM) ou colocar o .s no gcc (para
+uso do GAS). 
+Para usar o printf, devemos SEMPRE concatenar um 0 ao final da string,
+junto a uma barra (ascii 10). Isso é importante porque o printf espera
+um \0.

@@ -1,0 +1,16 @@
+INTERFACES COM USUÁRIOS
+
+* Erros devem ser detectados e reportados; a recuperação deve ser
+  tentada quando cabível
+* Mensagens de erro devem ser tão indormativas quanto possível 
+  (indicando a causa do erro)
+* O texto das mensagens de erro, do 'prompt' e das caixas de diá-
+  logo devem expressar o formato dos dados de entrada válicos(de
+  forma a conduzir o usuário ao modo correto de uso do programa)
+  --> Devem imprimir uma 'usage' (como usar a função ou um exem-
+      plo de como usá-las).
+* Princípios de estilo que ontribuem para criação de interfaces
+  (textuais ou gráficas) fáceis de usar: smplicidade, clareza, re-
+  gularidade, familiaridade, restrição.
+  --> Por exemplo, restringir as entradas para impedir que o usu-
+      ário faça mal uso.

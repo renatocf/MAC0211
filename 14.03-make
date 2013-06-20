@@ -1,0 +1,47 @@
+GNU Make
+
+* É um utilitário que determina automaticamente quais pedaços 
+  de um grande programa precisam ser recompilados e dispara os
+  comandos que os recompilam;
+* Pode ser usado com qualquer linguagem de programação cujo
+  compilador possa ser executado no shell;
+* Não selimita à construção de programas. Pode ser usado para 
+  qualquer tarefa em que alguns arquivos precisam ser atualiza-
+  dos automaticamente a partir de outros sempre que houer alte-
+  rações em algum dos arquivos.
+* Para usar o Make, é preciso escrever um arquivo chamado 'Makefile',
+  que descreve os relacionamentos entre os arquivos do seu programa
+  e indica comando para atualizar cada arquivo.
+* Uma vez que um 'makefile' correto exista, basta executar o co-
+  mando 'make' para que todas as recompilações necessárias para 
+  a atualização do programa seja executado.
+
+MAKEFILE
+
+Regras:
+* Um makefie é composto pro regras do tipo
+    alvo ...: pré-requisitos ...
+        receita
+        ...
+        ...
+* alvo: geralmente é o nome de um arquivo que é gerado por um programa
+  (ex: arquivos executáveis ou objeto). Mas pode ser também o nome de 
+  uma ação a ser executada.
+* pré-requisito: é um arquivo que é usado como entrada na criação do
+  'alvo'. Um alvo pode depender de vários arquivos
+* receita: ação que o 'make' executará. Pode possuit um ou mais co-
+  mandos (na mesma linha ou um em cada linha). 
+
+    IMPORTANTE: é preciso colocar um caractere de TAB no início de
+                cada linha da receita (ainda que isso possa ser al-
+                terado modificando uma variável de ambiente.
+
+    O arquivo alvo só é gerado quando houver modificações no arquivo
+    de pré-requisitos
+
+* Em uma regram, uma receita geralmente serve para criar o arquivo 
+  alvo quando há alteração em algum dos arquivos pré-requisitos.
+* O caractere '\' é usado para dividir uma linha longa
+* A primeira regra é chamada de 'meta padrão' (default goal)
+* Para apagar arquivos gerados durante o processo, podemos criar uma 
+  regra 'clean', sem dependências.

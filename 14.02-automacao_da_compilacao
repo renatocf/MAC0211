@@ -1,0 +1,14 @@
+AUTOMAÇÃO DA COMPILAÇÃO
+
+* GNU Make: bastante usada para código C, C++, LaTeX.
+            Mas pode ser usada com qualquer outra linguagem
+            cujo compilador possa ser executado por um coman-
+            do 'shell'
+* Apache Ant: usada principalmente para código Java
+              (mas também funciona para C, C++, ...)
+* Apache Maven: usada em projetos em Java
+                (entrentanto, é mais que um gerenciador de compilação;
+                ela auxilia no gerenciamento do projeto, publicando in-
+                formações do projeto e possibilitando o compartilhamento
+                entre projetos).
+* MSBuild (Microsoft): funciona conjuntamente como Visual Studio

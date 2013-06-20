@@ -1,0 +1,108 @@
+A ARTE E A CIÊNCIA DA DEPURAÇÃO
+
+O Termo Bug:
+* Já existia antes da computação
+* O primeiro bug computacional era um 'bug' mesmo
+* Sempre existiu e sempre existirá
+* Temos que aprender como lidar com eles e minimizá-lo.
+
+FATORES QUE LEVAM A ERROS DE PROGRAMAÇÃO
+
+* Fatores Humanos: 
+    * Inexperiência; 
+    * Falta de concentração; 
+    * Cansaço;
+    * Erros normais (errar é humano).
+* Fatores Tecnológicos:
+    * Linguagem de programação;
+    * Ferramentas;
+    * Complexidade e tamanho do software.
+
+TÉCNICAS PARA GARANTIR A INTEGRIDADE DE SOFTWARE
+
+* Procas formais da correção de programas;
+    (às vezes, podemos provar que um algoritmo está correto,
+     mas nem sempre a implementação está)
+* Modelagem cuidadosa do problema;
+* Análise dos requisitos;
+* Verificação formal do que um programa faz.
+    (Linguagens que permitem modelar o problema matematicamente)
+    
+    Algumas dessas técnicas não são aplicáveis a sistemas
+    grandes (apenas a programas pequenos).
+
+ERROS VÂO SEMPRE EXISTIR
+    * Prece que não há como fugir disso (pelo menos com a tecnologia
+    das próximas décadas)
+    * Solução:
+      * TESTES para descobrir os erros;
+      * DEPURAÇÃO para localizar e eliminar erros;
+      * Desencolcimento dirigido por testes (TDD) para evitar
+        que erros apareçam.
+    
+DIFICULDADES
+    * Depurar programas é difícil e exige muito tempo;
+
+A INFLUÊNCIA DAS LINGUAGENS
+    * Linguagem de MOntagem;
+    * BASIC, MS-Visual Basic (goto, argh!)
+    * C
+    * C++
+    * Pascal
+    * Java
+    
+    * Algumas características que 'previnem' erros:
+      * verificação de índices de vetores
+      * ausência de ponteiros
+      * presença do tipo string
+      * cleta de lixo automática
+      * verificação forte de tipos
+
+O QUE FAZER:
+    * É preciso estar ciente das características perigosas das 
+      linguagens ocm as quais se está lidando.
+
+DEPURADORES
+    * Execução passo a passo: step in, step through, run till return
+    * Breakpoints (linha, função, condição);
+    * Impressão de valores de variáveis;
+    * Acompanhamento de variáveis
+    * Sequência de chamadas de funções.
+
+    * Depuradores são uma ferramenta extremamente útil, mas às vezes
+      não são a alternativa:
+      * Algumas linguagens e ambientes não o têm;
+      * Podem variar muito de um ambiente para o outro;
+      * alguns programas, às vezes, não se dão bem com depuradores 
+        (SOs, sistemas distribuídos, múltiplos threads, sistemas de
+        de tempo real)
+    
+    * Solução: uso de 'print' bem feito.
+    * Depuradores podem ser muito cmplicados para iniciantes. Um uso
+      criterioso do 'print' pode ser mais fácil.
+    
+    * BUGS fáceis:
+      * Falha de segmentação *segmentation fault) é o melhor caso
+        possível para um erro:
+        * Basta executar no deputador e olhar o estado da pilha e
+          das variáveis no momento do erro;
+        * ou então: arquivo 'core'
+        * gdb arq_executavel core
+      * O programa fez algo que não devia ou imprimiu algo absurdo?
+      * Pare para pensar o que pode ter ocorrido
+      * Olhe para a saída do programa: comece do lugar onde a coisa
+        inesperada aconteceu e volte, passo a passo, examinando cada
+        mensagem e tente descobrir onde o erro se originou 
+        ( = pense em marcha ré! )
+    
+    * Procure por padões familiares de erros:
+      * Erro comum com iniciantes:
+        int s;
+        scanf("%d", n);
+      * 
+        int n = 1;
+        double d = PI;
+        printf("%d\n%f", d, n);
+        2432413547987218634891204371234
+        
+        (o printf é, em geral, muito grande)

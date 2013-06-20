@@ -1,0 +1,130 @@
+Primórdios - Calculadoras
+
+* Ábaco: para somas e subtrações (5500 a.C);
+* Régua de cálculo: baseada nos estudos sobre logaritmos do escoês
+                    John Napier; ajudava na multiplicação de grandes
+                    números (1638);
+* Máquina de Pascal: primeira calculadora mecânica da história, rea-
+                     liza somas e subtraçĩes. Em 1694, umaversão apri-
+                     morada capaz de fazer multiplicações e divisões 
+                     foi criada pelo alemão Leibniz (1642);
+* Arithmomètre: primeira calculadora mecânica comercializada com suces-
+                so (1820).
+
+Essas máquinas não são chamadas de COMPUTADORES porque não eram pro-
+gramáveis (os dados só podiam ser usadas manualmente).
+
+-----------------------------------------------------------------------
+
+Primórdios - Tear semi-automático (1790)
+
+* Criado por Joseph Marie Jacquard, na França;
+* Capaz de desenhar padrões de alta complexidade;
+* Desenhos (flores, flolhas e figurasgeométricas) eram codificadas
+  em cartões perfurados;
+* Despertou protestos de artesões (que temiam perder empregos para as
+  máquinas).
+
+
+Primórdios- Nomes importantes
+
+* Charles Babbage (1791-1871): projetou uma máquina PROGRAMÁVEL - a 
+  máquina analítica (1833). Mas não conseguiu construí-la;
+* Ada Lovelace - mãe da programação (1815-1852): escreveu programas 
+  para a máquina de Babbage; inventou a palavra algoritmo
+  (Al-Khawarizmi)
+* Herman Hollerith (1860-1929): criou cartões perfurados para uso
+  no censo americano (1890); essa tecnologia levou à criação da IBM;
+* Alan Turing (1912-1954): realizou diversas contribuições práticas e 
+  teóricas à Ciência da COmputação (teoria da computabilidade, cripto-
+  logia, preogramação, redes neurais, inteligência artificial);
+* Richard Von Neumann: criou a arquitetura dos computadores;
+
+
+1ª Geração - Computadores a Válvula (1941-1957)
+
+* Destinados apenas a funções de cálculos);
+* Usados na resolução de problemas específicos (cada máquina possuía o
+  seu prórpio código; novas funções requeriam a reptrogramação
+  completa);
+* Eram gigantescos e sofriam constantemente com o superaquicimento;
+  Cada válcula acesa ou apagada representava uma instrução à máquina;
+  Exemplo: ENIAC (Eletronic Numerical Integrator and Computer), criado
+  em 1945; considerado por muitos o primeiro computador eletrônico em
+  geral; 
+  - O ENIAC 30 ton, 18 mil válvulas e fazia 4500 cálculos por segundo.
+  - Instiprou Von Neumann a desenvolver o conceito de PROGRAMA
+    ARMAZENADO EM MEMÓRIA (base da arquitetura usada até hoje)
+
+
+2ª Geração - Computadores e transistores (1958-1954)
+
+* Transistores: componentes eletrônicos criados em 1947, pela Bell La-
+  boratories, a partir de silício (material utilizado ate hoje em pla-
+  cas e outros componentes);
+* A vantagem dos transistores era que eram menores, não se quebravam 
+  com impacto e se aqueciam menos;
+* Os computadores diminuíram cerca de 100 vezes;
+* IBM 7094: Usava imensas unidades de fita magnéticapara o armazenamento
+  de informações para uso posterior, além de sistemas de cartões perfu-
+  rados;
+
+
+3ª Geração - Circuítos Integrados (1965-1970)
+
+* Circuítos integrados feitos de silício permitiram a miniaturização de
+  componentes eletrônicos;
+* Aumentos significativos na velocidade e eficiência dos computadores;
+* Uma única placa da qual eram criadas vários transistores, o que aju-
+  dou a aumentar a velocidade;
+* Teclados e monitores para a entrada e saída de dados;
+* Primeiros sistemas operacionais (não gráficos);
+* Capacidade de upgrade nas máquinas (partes podiam ser trocadas);
+* IBM 360 (mais de 30.000 unidades);
+
+
+4ª geração - Microprocessadores (de 1971 até hoje)
+
+* 1971: primeiro microprocessador (o Intel 4004). Foi p primeiro circuí-
+  to integrado que incorporou todos os elementos de um computador: UCP,
+  memória, controle de entrada/saída;
+* Surgimento de MICROCOMPUTADORES, de menos de 20kg;
+* 1975: um dos primeiros computadores pessoais de sucesso: Altair 8800
+  vendido como um kit de montar por revistas especializadas); os barra-
+  mentos desenhados para o Altair se tornaram um padrão de fato;
+* 1975: criação do interpretador para BASIC (Bill Gates e Paul Allen);
+  fundação da Microsoft;
+* 1976: criação da Apple (Steve Jobs e Steve Wozniac); criação dos com-
+  putadores Apple I (1976) e Apple II (1977)
+* Anos 80: IBM lança PC (1981): Apple cria o primeiro SO gráfico
+  comercial -  Macintosh (1984); Microsoft se estabelece com o SO MS-DOS
+  (1981) para IBM-PCs e mais tarde lança sua interface gráfica Windows
+  1.0 (1985). Apesar da fama, a Xerox foi a primeira a idealizar uma in-
+  terface em janelas (1973);
+* Anos 90: popularizção da Internet e criação da Web (1991); nascimento
+  do Lnux (1991); intensifica-se o movimento do software livre.
+
+Atualidade
+
+* Computação paralela, processadores com múltiplos núcleos (multi-core);
+* Computadores portáteis (notebooks, smartphones);
+* Computação ubíqua/perfasiva (o computador onipresente na vida pessoal
+  das pessoas - com interfaces que fazem as pessoas não notaremque es-
+  tão lidando com computadores);
+* Computação verde (tentar reduzir o consumo de energia das máquinas);
+
+-----------------------------------------------------------------------
+LEI DE MOORE
+
+* Em 1965, Gordon E. Moore, co-fundador da Intel, escreveu um artigo 
+  chamando a atenção para um padrão que ele havia observado: o número
+  de componentes nos circuítos integrados DOBROU TODOS OS ANOS, desde 
+  a invenção do circuíto integrado. Além disso, Moore profetizou que
+  essa tendência continuaria pelo menos pelos próximos 10 anos.
+* Essa "profexia" se mostrou estranhamento precisa. E talvez uma razão
+  foi que a indústria desemicundutores traçou seus objetivos baseado
+  nestra proporção.
+* A lei impacta:
+  - aumento nas capacidades de outros componentes (memória, processa-
+    mento);
+  - desenvolvimento de outras máquinas (fotográficas, etc).

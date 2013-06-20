@@ -1,0 +1,46 @@
+|---|---|---|---|---|---|---|
+|%%%| # |   |   |   |   |   |
+|%%%|---|---|---|---|---|---|
+|%%%%%%%| # |   |   |   |   |
+|%%%%%%%|---|---|---|---|---|
+|%%%%%%%%%%%| # |   |   |   |
+|---|---|---|---|---|---|---|
+|%%%%%%%| # |   |   |   |   |
+|%%%%%%%|---|---|---|---|---|
+|%%%%%%%| # |   |   |   |   |
+|---|---|---|---|---|---|---|
+|%%%%%%%%%%%| # |   |   |   |
+|%%%%%%%%%%%|---|---|---|---|
+|%%%%%%%%%%%| # |   |   |   |
+|---|---|---|---|---|---|---|
+|%%%%%%%| # |   |   |   |   |
+|---|---|---|---|---|---|---|
+|%%%| # |   |   |   |   |   |
+|---|---|---|---|---|---|---|
+|%%%%%%%| # |   |   |   |   |
+|%%%%%%%|%%-|---|---|---|---|
+|%%%%%%%|%%%% # |   |   |   |
+|---|---|---|---|---|---|---|
+
+Para podermos criar as formas, poderemos usar os limites
+das margens como sendo PONTOS e preenchê-los utilizando 
+POLÍGONOS (triângulos e retângulos). Podemos preenchê-los,
+então, com CORES.
+
+Como usaremos pixels, será ideal, em vez de usarmos cada
+pixel sendo um quadrado, usarmos CONJUNTOS de pixels como
+quadrados, usando eles D x D:
+                    
+                      { |---|---|---|   
+                      { |   |   |   |
+                      { |---|---|---|
+                    D { |   |   |   |
+                      { |---|---|---|
+                      { |   |   |   |
+                      { |---|---|---|
+                        ^^^^^^^^^^^^^
+                              D
+
+Outra alternativa é usar a função 'al_draw_prim', que cria
+polígonos usando pontos e poderemos colocar IMAGENS (buscar
+como fazer isso).

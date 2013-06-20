@@ -1,0 +1,18 @@
+Geração automática de dependências
+
+* Existem ferramentas que geram automaticamente regras de dependências
+  entre arquivos e até mesmo 'makefiles' completos
+* Exemplos:
+    - makedepend
+        O makedepend inclui as dependências encontradas no final
+        de um makefile já existente.
+    - gcc -M
+        Cria a lista de dependências completa, incluindo tanto
+        as bibliotecas padrão (com <>) quanto as bibliotecas
+        do usuário (com "").
+    - gcc -MM
+        Cria a lista de dependências apenas com os ""
+    - GNU Automake
+        Uma ferramenta mais completa, que permite que façamos 
+        tanto um script 'configure', relacionado à máquina, quanto
+        um makefile completo.

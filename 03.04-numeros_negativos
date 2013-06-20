@@ -1,0 +1,83 @@
+NÚMEROS NEGATIVOS EM BINÁRIO
+
+REPRESENTAÇÃO SINAL E MAGNITUDE:
+
+    * Bit mais significativo representa o sinal do número
+        * 0 - número positivo
+        * 1 - número negativo
+    * Ex: (0101)_2 == (5)_10 e (1101)_2 == (-5)_10
+
+    Problema:
+        Algoritmo para a soma:
+        - caso 1: dois números positivos: soma;
+        - caso 2: dois números negativos: soma e coloca-se o sinal
+                                          de menos para o resultado
+        - caso 3: positivo e negativo: subtrai o maior do menor, e 
+                                       deixa o sonal do maior
+        Essa representação, apesar de intuitiva, não é muito
+        útil, pois teríamos 2 símbolos para o 0: 00000000 e 10000000
+
+COMPLEMENTO DE 2:
+
+    * Usada na maioria dos computadores
+    * Facilita a soma: não é preciso de preocupar se o número
+      é positivo ou negativo... basta somá-los.
+    * Funcionamento análogo ao de um odômetro (contador de quilometragem
+      de um carro). Quando atingimos o limite do número, ele volta para
+      o início da contagem. Assim, temos uma espécie de "classe de equi-
+      valência" entre os números que podem ser usados. Assim, em um
+      odômetro de 4 dígitos (por exemplo), o número 9995 é equivalente 
+      ao número -5 ou ao 19995. Os números são o resto da divisão do
+      número por m, m o máximo de dígitos possíveis.
+
+    * Assim, pelo método de complemento de 2, temos que cada dígido
+      representa um tipo de número: metade negativos, metade positivo
+
+    Ex:
+    -1  | 15 | 1111 A parte de cima
+    -2  | 14 | 1110 da tabela é usada
+    -3  | 13 | 1101 para representar
+    -4  | 12 | 1100 os números nega-
+    -5  | 11 | 1011 tivos (o primeiro
+    -6  | 10 | 1010 número representa
+    -7  | 9  | 1001 o "sinal de menos",
+    -8  | 8  | 1000 pois eles são negativos
+    ----------      
+    -9  | 7  | 0111 A parte de baixo
+    -10 | 6  | 0110 representa os nú-
+    -11 | 5  | 0101 meros positivos 
+    -12 | 4  | 0100 (o '0' representa
+    -13 | 3  | 0011 o sinal de '+')
+    -14 | 2  | 0010 
+    -15 | 1  | 0001 
+
+    Conversão de binário puro para complemento de 2:
+     * Passo 1: inverter os bits (trocar 0 por 1)
+     * Passo 2: somar 1 ao número resultante da inversão
+     OBS: Os mesmos passos podem ser usados para o precesso
+          inverso (e há um registrador que faz isso de forma
+          muito rápida no processador).
+
+     Exemplos:
+     DECIMAL Binário Puro Complemento de 2
+                              (8 bits)
+      -108    -01101100       10010100
+     
+     (-108)_10 == ?_c2
+     
+     01101100 |
+     10010011 | Conversão (passo 1)
+           +1 | Soma (passo 2) 
+     ---------|
+     10010100 |
+
+     A vantagem desse método é que não precisamos de um registrador de 
+     subtração: apenas um de soma e o de conversão para negativo, pois
+     sabemos que 200 - 108 = 200 + (-108).
+     Achamos, então, o resultado.
+     
+     CARRY:
+     Esta é um FLAG que mostra se houve um overflow (excesso de números
+     em algum processo). Isso pode atrapalhar algum tipo de processo. Se
+     a FLAG (que é um registrador de 1 bit) é ativada, prodemos fazer 
+     algum método que trate a resposta.

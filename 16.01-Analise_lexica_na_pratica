@@ -1,0 +1,8 @@
+Para realizarmos uma Análise Léxica com uma calculadora de expressões
+infixas, precisamos utilizar uma GRAMÁTICA. Consideremos:
+
+expressão: EXPRESSÃO - TERMO | EXPRESSÃO + TERMO | TERMO +/- TERMO
+termo: TERMO * fator | TERMO / fator | TERMO */ TERMO
+fator: NUMERO | NEGAÇÂO(FATOR) | PAR_ESQUERDA | PAR_DIREITA | 
+            VARIAVEL
+variavel: LETRA | COL_DIREITA | COL_ESQUERDA

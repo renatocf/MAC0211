@@ -1,0 +1,268 @@
+MULTIPLICAÇÃO - MUL
+
+    Formato
+
+    Não tem o mesmo formato que as operações aritméticas anteriores
+    MUL só finciona para a multiplicação de números SEM SINAL.
+
+    Para números de 8 bits: 
+        MUL BH equivale a AX <- AL x BX
+                          (resultado de 16 bits)
+        Ou seja, o operando é sempre multiplicado pelo valor em AL e o 
+        resultado é armazenado em AX.
+
+    Para números de 16 bits: MUL reg/bit
+        MUL BX equivale a DX:AX <- AX x BX
+                          (resultado de 32 bits)
+
+    Para números de 32 bits: MUL reg/bit
+        MUL EBX equivale a EDX:EAX <- EAX x EBX 
+                           (resultado de 64 bits)
+
+    O MUL não pode ser usado para multiplicar por um valor constante.
+
+DIVISÃO: DIV
+
+    FORMATO
+    Duncioa de forma inversa ao MUL
+    DIV e válida apenas para a conversão de inteiros sem sinal.
+
+    * DIV reg/mem
+    * Ex: DIV BH
+          DIvide o valor em AX pelo valor em BH, armazenando o quociente
+          em AL e o resto em AH.
+        
+          17 / 3                
+          MOV AX,17    |00000000|00010001| AX
+          MOV BH,3     |00000011|00000000| BX
+          DIV BH           BH       BL
+                     -----------------------
+                       |00000010|00000101|
+                           AH       AL 
+                       Quociente  Resto
+
+    * Tabela de uso dos registradores:
+    | Divisor | Dividendo | Resto | Quociente |
+    |   32    | EDX:EAX   | EDX   |    EAX    |
+    |   16    | DX:AX     | DX    |    AX     |
+    |   8     | AX        | AH    |    LH     |
+    
+    * EXCEÇÕES: 
+        Divisão por 0 (gera uma interrupção)
+        OVERFLOW (tamanho da divisão muito grande) - pode 
+        gerar resultados inesperados.
+
+IMUL/IDIV: operações com inteiros com sinal
+    FUncionam de maneira análoga ao MUl e ao DIV
+
+AND, OR, NOT
+    O resultado é armazenada no primeiro operando.
+    
+    FORMATO:
+    AND  reg,reg/mem/const ou AND mem,reg/const
+    OR   reg,reg/mem/const ou OR  mem,reg/const
+    XOR  reg,reg/mem/const ou XOR mem,reg/const
+    NOT  reg/mem              ; inverte os bits   
+    
+    TABELA VERDADE
+    
+    | Op1 | Op2 | AND | OR  | XOR |
+    |  0  |  0  |  0  |  0  |  0  |
+    |  0  |  1  |  0  |  1  |  1  |
+    |  1  |  0  |  0  |  1  |  1  |
+    |  1  |  1  |  0  |  1  |  0  |
+
+TRUQUES DE NÚMEROS BINÁRIOS
+    As operações lógicas podem ser usadas para:
+    * "resetar"/limpar (= atribuir 0's a) bits
+    * "setar" (= atribuir 1's a) bits
+    * inverter bits
+    * examinar bits
+    
+    PARA "RESETAR" UM BIT
+    Exemplo: resetar o 3º bit menos significativo do AH:
+             AND AH,00000100B
+             resetar o 3º bit de 10011011:
+             AND 10011011,00000100
+            
+                 10011011
+             AND 00000100
+                 --------
+                 10011000
+    
+    PARA "SETAR" UM BIT
+    Exemplo: setar o 3º bit menos significativo do AH:
+             OR AH,00000100B
+             setar o 3º bit de 10011011:
+             OR 10011011,00000100
+            
+                10011011
+             OR 00000100
+                --------
+                10011100
+    
+   PARA INVERTER BITS ESPECÍFICOS 
+   Exemplo: inverter o 4º bit mais significativo do AX:
+            xOR AH,1000H
+            setar o 3º bit de 10011011:
+            XOR 1001101100000000,00000100
+            
+                10011011
+            XOR 00000100
+                --------
+                10011100
+
+   PARA LOCALIZAR BITS ESPECÍFICOS 
+   Exemplo: inverter o 4º bit menos significativo do AX:
+            AND AH,1000H
+            setar o 3º bit de 10011011:
+            AND 10011011,00000100
+            
+                10011011
+            AND 00000100
+                --------
+                10011100
+    
+    PARA ZERAR UM REGISTRADOR:
+    Exemplo: XOR ECX,ECX
+    
+    PARA VERIFICAR SE UM REGISTRADOR É NULO:
+    Exemplo: OR ECX,ECX
+             Obs: se o registrador for nulo, então 
+                  a flag 'zero' e'setada.
+    
+INSTRUÇÃO PARA TROCAR SINAL NEG
+    Faz o complemento de dois em uma expressão, trocando, também,
+    o seu sinal:
+    FORMATO: NEG reg/mem
+
+/******************************************************************/
+INSTRUÇÂO PARA TRANSFERÊNCIA DE CONTROLE
+
+SALRO INCONDICIONAL - JMP
+    JMP rotulo (rot)
+    Pode criar uma forma de 'laço eterno'
+
+INSTRUÇÃO DE COMPARAÇÃO - CMP 
+    FORMATO: CMP reg,reg/mem/const
+    Resultado é armazenado em uma flag
+    Não armazena a subtração, mas seta as flags de números
+    negativo, positivo ou de zero. Com elas, podemos fazer
+    as comparações conforme o necessário.
+    EXEMPLOS: CMP AX,5
+              CMP CX,[EBX]
+
+Há vários tipos de pulos:
+    J - JUMP
+    N - NOT
+    G - GREATER
+    L - LOWER
+    E - EQUAL
+    
+    Combinando as siglas, temos: 
+        JE, JNE, JG, JGE, JNG, JNGE, JL, JLE, JNL, JNLE
+    Essaes saltos consideram o resultado da última comparação 
+    realizada. Eles admitem comparações COM SINAL.
+
+ESTRUTURA DE COMANDO IF-ELSE
+
+
+ |   Faz uma comparação ou    |
+ | operação lógica/aritmética |
+              ||
+              \/
+              /\
+             /  \
+            /    \
+           /      \
+          / salto  \ 
+         / condicio-\
+||-------\   nal    /
+||        \        /
+||         \      /
+||          \    /
+||           \  /
+||            \/
+||            ||
+||            \/
+|| | comandos para verdadeito | --
+||                               ||
+|> |   comandos para falso    |  || incondicional
+              ||                 ||
+              || <----------------
+              \/
+
+ESTRUTURA DE UM WHILE
+
+ |   Faz uma comparação ou    |
+ | operação lógica/aritmética |
+              ||
+              \/
+              /\
+             /  \
+            /    \
+           /      \                 
+          / salto  \             
+         / condicio-\            
+||-------\   nal    /-------------|
+||        \        /             ||
+||         \      /              ||
+||          \    /               ||
+||           \  /                ||
+||            \/                 ||
+||            ||                 ||
+||            \/                 ||
+|| | comandos para verdadeito | --
+||                               
+|> |   comandos para falso    |  
+              ||                 
+              || 
+              \/
+
+INSTRUÇÕES PARA SALTOS CONDICIONAIS
+JZ - jump if zero
+JNZ - jump if not zedo
+
+INSTRUÇÕES PARA SALTOS UNSIGNED
+    J - JUMP
+    N - NOT
+    A - ABOVE  
+    B - BELOW
+    E - EQUAL
+    
+    Combinando as siglas, temos: 
+        JE, JNE, JA, JAE, JNA, JNAE, JB, JBE, JNB, JNBE
+    Essaes saltos consideram o resultado da última comparação 
+    realizada. Eles admitem comparações SEM SINAL.
+
+/******************************************************************/
+CHAMADAS DO SISTEMA OPERACIONAL (= SYSTEM CALLS ou SYSCALL)
+
+* Forma por meio da qual programas solicitam servoços ao núcleo
+do SO.
+* Exemplos de serviços: operalçoes de leitura e escrita, uso de
+                        diretórios, etc.
+* Ver códigos em syslinux e, para mais informações, consultar man
+  page.
+
+* Como fazer em assembly:
+    * Colocar número da chamada ao sistema em EAX
+    * Colocar OS 3 primeiros argumentos em EBX, ECX, EDX (mais
+    * ESI e EDI se necessário)
+    * Gerar a interrupção de chamada ao sistema (instrução INT 0x80)
+      (interrompe o fluxo de execução e o põe no EAX)
+    * Quando há valor de retorno, ele é colocado em EAX.
+* 
+
+/******************************************************************/
+MONTADORES
+
+GCC Inline Assembly
+* Suporte à arquitetura x86 bastante satisfatório
+* Possibilita que o código em linguagem de máquina seja inserido 
+  em programas C
+* Usa o programa GAS - GNU Assembly Sistem
+
+NASM - Netwide Assembler
+* Bastante usado (confiável para o desenvolvimento de aplicações de
+  gande porte. Não vem pré-instalado.

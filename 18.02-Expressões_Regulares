@@ -1,0 +1,57 @@
+EXPRESSÕES REGULARES
+
+* É uma mini-linguagem declarativa usada para 'descrever padrões
+  de texto' (= esoecificar um conjunto de cadeias de caracteres)
+* Geralmente, esta incorporada em outras mini-linguagens
+* É onipresente - usada em muitas ferramentas e linguages
+* Subtitui grandes columer de implementação de diferentes funcio-
+  nalidades de busca
+
+Um exemplo simples de ferramenta que usa expressões regulares é o 
+'grep', um filtro que feixa passar para sua saída padrão toda linha 
+de usa entrada que casa (match) com um padrão especificado.
+
+TIPOS UNIX E EUS DERIVADOS
+
+* Expressões Glob: 
+    Limitam-se às expressões envolvendo metacaracteres usadas nos 
+    shells antigos para o casamento com nomes de arquivos (pouco 
+    usadas atualmente - o 'ls' ainda a usa):
+    Metacaracteres (caracteres com significado diferente) existentes:
+    * casa com qualquer sequência de caracteres;
+      Ex: carn* casa com 'carne', 'carneiro', 'carnudo'
+    
+    ? casa com exatamente 1 caracter simples;
+      Ex: ?at casa com 'Bat' ou 'cat', mas não com 'at' ou 'habitat'
+    
+    [...] casa cin uma classe de caracteres;
+      Ex: [CBat] casa com 'Cat' ou 'Bat', mas não com 'cat', 'bat'
+          ou mesmo 'at'
+
+* Expresões regulares básicas:
+    Notação aceita pelos utilitários 'grep', 'sed' (stream editor) e 
+    'ed' (line editor)
+* Expresões regulares estendidas:
+    Notação aceita pela versçai estendida do 'grep', o 'egrep'. Ex-
+    pressões regulares no Lex e Emacs são muito parecidas com essas.
+* Expresões regulares Perl:
+    Notação aceita para as funções de expressões regulares Perl (onde
+    foi criada), Python e Ruby.
+
+* EXPRESÕES REGULARES BÁSICAS
+    .           um caracter
+    [abcd]      um caracter no conjunto dado
+    [a-zA-Z]    um caracter nos intervalos dados
+    [^abcd]     um caracter que não está no conjunto dado
+    ^           início da cadeia de caracteres
+    $           fim da cadeia de caracteres. Em ferramentas
+                que se baseiam no processamento de linhas, casa
+                com o final da linha
+    *           elemento precedente 0 ou mais vezes
+    'x.y'       x seguido de qualquer caracter seguido por y
+    'x\.y'      x seguido por um ponto (scape) seguido por y
+    'xz*y'      x seguido de 0 ou mais caracteres z e y
+                'xy', 'xzy', 'xzzy', 'xzzzzzy', mas não 'xz' ou 'xdy'
+    "s[xyz]t"   s seguido de x, y ou z e depois t
+    "s[^x0-9]t' s seguido de qualquer coisa menos 'x' ou números e
+                seguida de 't' 

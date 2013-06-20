@@ -1,0 +1,12 @@
+REGISTRADORES FAMÍLIA 86
+
+* A (acumulador)
+* B (base)
+* C (contador)
+* D (dad0s)
+* Processador 8086 (16 bits):
+  AX(AH,AL), BX(BH,BL), CX(CH,CL), DX(DH,DL)
+* Processador 80836 (32 bits):
+  EAX, EBX, ECX, ED, ESP, EBP, ESI, EDI
+* Processaor Intel x86-64 e AMD64 (64 bits):
+  RAX, RBX, RCX, RDX, RSP, RXP, RSI, RDI, R8-15

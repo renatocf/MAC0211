@@ -1,0 +1,176 @@
+MATÉRIA DA prova
+* Introdução à análise léxica;
+* Processamentos de mareos com o CPP e o M4;
+* Expressões regulares;
+* Processamento de textos com o Awk;
+* Geração de analisadores léxicos com o Flex;
+* Geração de analisadores sintáticos com o Bison;
+* A arte e ciência da depuração.
+
+CONHECIMENTOS ESSPERADOS
+* Etapas envolvidas em um processo de compilação (análises
+  léxica, sintática e semântica);
+* Notação prefixa, infixa e pós-fixa;
+    --> Infixa usava recursão (fator, expressão, etc.) e precedência
+        (que usava uma linguagem formal).
+* Implementação de umacalculadora que usa notação pós-fixa ou infixa.
+
+PROCESSAMENTO DE MACROS (aula 17)
+Conhecimentos esperados:
+* Pré-processadores;
+* Macros (#define e uso);
+* Processamento de macros na linguagem C (não entramos em detalhes);
+* Processamento de macros com o M4.
+  (Como funciona e existe as expansões da macro)
+
+* Autoconf e automake não caem na prova
+
+EXPRESSÕES REGULARES (aula 18)
+Conhecimentos esperados:
+* Expressões glob (como no ls - * qualquer coisa, ? para q qualquer);
+* Expressões regulares básicas (grep, com ^,$,?,*,+,.);
+* Expressões regulares extendidas (egrep, com as acima e {,},|)
+    O mais importante é saber as expressões regulares extendidas
+
+PROCESSAMENTO DE TEXTOS - AWK (aula 18-19)
+Conhecimentos esperados:
+* Funcionalidades do Awk (análise de expressões, geração de relatórios)
+* Formato de um 'script' em Awk (registros (padrão \n) com campos
+  (padrão é ' '). Cada campo pode ser acessado individualmente (com
+  variáveis posicionais $0 - linha, $1 - 1º campo, $2 2º campo, ...)
+  * Variáveis NR - número de registros, NF - número de campos.
+  * Funções 'print' (que já coloca um \n no final)
+  * Ex:
+        teste | de | MAC0211\n <- registro
+        $0 = linha inteira
+        $1 = 'teste'    
+        print $3: imprime MAC0211
+  * Formato do arquivo:
+                { ... } comandos sem algo para casar são 
+                        executados para todos
+    /MAC0211/   { ... } realiza a ação para todos
+    END         { ... } executa no final do arquivo
+    BEGIN       { ... } executa no início do arquivo
+
+GERADORES DE ANALISADORES LÉXICOS - Flex (aulas 20-22)
+Conhecimentos esperados:
+* Propósito de um analisador léxico; 
+  (Separar o texto em elementos léxicos - tokens - que podem ser cap-
+  turados e processados, inclusive por um analisador sintático)
+* Propóstito de um gerador de analisador léxico
+  (gerar analiadores mais complexos, o que é uma tarefa complicada)
+* Estrutura de um arquivo de entrada do Flex
+
+* Forma geral
+    Definições
+    ----------------------------------------------
+    %{
+        ... /*  Código em C copiado pelo Flex. Útil para colocar
+                comentários, includes e variáveis globais */
+    %}
+    BRANCOS [ \t\n]
+    /* Definições para ajudarem na hora da escrita */
+    
+    %% /* <-- separador OBRIGATÓRIO */
+    
+    Regras
+    ----------------------------------------------
+        { BRANCO }*      { ... 
+                            /* Executa para todos os brancos
+                               algum tipo de código em C */
+                         }
+        [0-9]+           { printf("%s", yytext); 
+                           soma += atoi(yytext);
+                           /* yytext é a variável que contém a
+                              string de match */
+        IMPORTANTE: . não casa com \n
+    
+    %% /* <-- separador */
+    
+    Código do usuário (para gerar um main - OPCIONAL)
+    ----------------------------------------------
+    ex:
+    int main() { yylex(); printf("Soma: %d", soma); return 0; }
+
+ANALISADORES SINTÁTICOS - Bison (aula 22)
+Conhecimentos esperados:
+* Propósito de um analisador sintático
+* Propósito de um gerador de analisador sintático
+* Forma geral:
+
+    %{
+        int nMAC = 0;
+        int nMAE = 0;
+        int nMAT = 0;
+    %}
+
+    %text [string] NOME
+
+    %% 
+    /* Regras */
+
+    arquivo: /*vazio*/
+             | arquivo linha;
+
+    linha: '\n'
+            | aluno '\n'
+
+    %%
+
+    int main()
+    {
+        yyparse();
+        /* Outras coisas */
+    }
+
+SISTEMAS DE CONTROLE DE VERSÃO (aula 23)
+Conhecimentos esperados:
+* Propósitos desses sistemas
+* Principais características
+* Arquitetura centralizada x distribuída
+
+A ARTE E CIÊNCIA DA DEPURAÇÃO (aula 24)
+Conhecimentos esperados 
+* Fatores que levam a erros de programação;
+* Técnincas para garantir a integridade de software
+* 'Dicas' para evitar os erros
+* 'Dicas' para a depuração (= identificação de erros)
+
+NÃO CAEM
+* Autoconf (aula 18)
+* Introdução ao Git (aulas 23 e 24)
+* Testes (aula 25).
+
+ALGUNS EXERCÍCIOS
+TEMA: análise léxica (notações e calculadores)
+1.  Qual a relaçaõ entre o número de chamadas das funções 'expr', 
+    'termo' e 'fator' na calculadora infixa (recursiva)?
+2.  Como implementar uma calculadora infixa recursivao operador '^'?
+    A precedência desse operadr é maior que a dos operadores de 
+    divisão e multiplicação?
+3.  Explique quais alteraçõesvocê fari na calculadore infixa (recursiva)
+    para poder realizar shits >> ou <<.
+
+TEMA: Processamento de Macros
+1. Discuta as vantagens e desvantagens de se definir funçoes em C
+   usando macros.
+
+TEMA: Expressões Regulares
+1.  Escreva uma expressão regular (usando a sintaxe das expressões
+    regulares específicas):
+    1 - Aquelas que possuam simente letras maiúsculas e minúsculas:
+        [[A-Z][a-z]]*[A-Z]?|[[a-z][A-Z]]*[a-z]? 
+         ou 
+        [a-z]?[[A-Z][a-z]*[a-z]?
+        
+    2 - Todas as vogais pelo menos uma vez e em ordem:
+        .*[Aa].*[Ee].*[Ii].*[Oo].*[Uu]
+    
+    3 - Todos os inteiros positivos menores que 3000
+        (3000|[12]?[0-9]?[0-9]?[0-9])
+    
+    4 - Todos os hexadecimais que podem ser representados com um 
+        [0-9A-Fa-f]?[0-9A-Fa-f]
+    
+    5 - Exatamente 100 cadeias diferentes
+        [0-9][0-9] ou [A-J][k-t] ou [0-9]{100}

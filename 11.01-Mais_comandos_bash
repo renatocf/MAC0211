@@ -1,0 +1,39 @@
+MAIS COMANDOS BASH
+* parallel: pega a saída de um programa, solta linha a linha, e exe-
+            cuta o comando vindo seguinte
+
+OPERADORES LÓGICOS
+* Lista E:  Usado com os operadores lógicos &&.
+            Só executa o segundo comando se o primeiro terminar
+            com sucesso.
+* Lista OU: Usado com os operadores lógicos ||;
+            Só executa o segundo comando se o primeiro terminar
+            sem sucesso.
+
+COMANDOS BUILTIN DO SHELL
+* history
+    Histórico dos comandos da seção do shell
+* pwd
+    Caminho do diretório atual
+* alias <nome>=<comando>
+    Cria um 'apelido' para algum outro comando
+
+LISTA DE COMANDOS DO SHELL
+    info coreutils
+
+COMANDOS DO BASH COM TECLADO
+* flechas verticais - percorre histórico de comandos
+* flechas horizontais - posicionamento na linha corrente
+* TAB - completa comando que começou a ser digitado (até 
+        onde houver ambiguidade)
+* TAB TAB - mostra as opções com ambiguidade
+
+PILHA DE DIRETÓRIOS
+
+O bash permite manter um uma pilhas os diretórios mais recentes.
+O seguintes comandos 'builtin' manipulam essa pilha:
+* pushd <dir>
+  Empilha o diretório atual e depois faz um 'cd' para dir
+* popd <dir>
+  Desempilha o diretório atual e depois faz um cd para dir
+* dirs -p: mostra a pilha de diretórios

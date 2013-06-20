@@ -1,0 +1,59 @@
+Professora: Kelly Rosa Bragheto
+E-mail: kellyrb@ime.usp.br
+Sala 106B
+
+Chave para inscrição no PACA: 2013labprog1
+
+Tópicos do curso:
+* Arquitetura de Computadores / história dos computadores;
+* Linguagens de montagens, ligação de prograas, interrupções,
+  interface com linguagens de alto nível, interface com hardware;
+* Ferramentas para o gerenaciamento de compilação de programas 
+  e bibliotecas (ex: 'make' e 'ant')
+* Modularização do código;
+* Construção de um programa de médio porte em uma linguagem proce-
+  dimental (ex: C);
+* Técnicas de depuração e testes de programas;
+* Ferramentas euxiliares no desenvolvimento de programas (ex: geren-
+  ciadores de versões, ambientes de desenvolvimento);
+* Expressões regulares, geradores de analisadores léxicos (ex: flex);
+* Noção básica de gra,áticas, geradores de analisadores sintáticos 
+  (ex: bison);
+* Entrada e saída padrão, concatenação de programas através de pipe-
+  lines;
+* Linguagens de processamento de texto (ex: awk e perl);
+
+--- LINGUAGENS DE MONTAGEM
+        Foram um intermédio entre a linguagem de máquina e as lingua-
+    gens de alto nível. Elas são instruções específicas para cada ar-
+    quitetura. Os compiladores atuais fazem uma conversão da lingua-
+    gem de alto nível para a de montagem, e depois esta converte para 
+    a de máquina.
+        Sabendo linguagens de montagem é possível saber como montar 
+    programas mais eficientes.
+
+--- GERENCIADORES DE COMPILAÇÃO
+        Ajudam a fazer o gerenciamento de arquivos e sua compilação ao
+    tratar de programas de médio/grande porte e a sua organização.
+
+--- MODULARIZAÇÃO
+        Organização/projeção de programas de maior portes.
+
+------------------------------------------------------------------------
+
+* P1 (1): 07/05
+* P2 (1): 20/06
+* SUB: 27/06
+* Final: (2*MP + 3*MEP)/5
+
+* EP1: em Assembler (para 07/05)
+* EP2: projeto a ser desenvolvido ao longo do semestre.
+
+-----------------------------------------------------------------------
+BIBLIOGRAFIA:
+
+- "Capítulo 2 - História da COmputação" de "introdução à Ciência da
+   Computação com Java e Orientação a Objetos";
+- "Chapter 2 - Computer Evolution and Performance" do livro "Computer
+   Organization and Architecture", de William Stallings;
+- "O microchip: pequena invençaõ, grande revolução", LSI-Poli-USP;

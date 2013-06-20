@@ -1,0 +1,29 @@
+TESTAS ≠ DEPURAR
+
+* Simplificando:
+    * Depurar: o  que se faz quando se sabe que o programa não funciona;
+    * Teste: tentativas sistemáticas de encontrar erros em programas que
+    * você 'acha' que está funcionando.
+    
+    "Testes podem mostrar a presença de erros, mas não a sua ausência"
+        Dikjestra
+
+TESTE ENQUANTO VOCÊ ESCREVE CÓDIGO
+    Se possível, escreva os tenstes antes mesmo de escrever o código
+    (uma das técnicas de XP).
+    Enquanto antes fpr encontrado o erro, melhor!
+    
+TÉCNICAS BÁSICAS
+    (Conselhos simples e úteis!)
+    
+    * Teste o código em seus limites;
+    * Teste pré e pós condições;
+    * Use premissas (assert);
+    * Programa defensivamente;
+    * Olhe os códigos de erro.
+
+TESTE O CÓDIGO EM SEUS LIMITES
+* Verigique o funcionamento de cada pequeno trecho de código (um laço
+  ou 'if', por exemplo)
+    * O laço é executado o número correto de vezes?
+    * O desvio de fluxo ocorre da maneira correta?

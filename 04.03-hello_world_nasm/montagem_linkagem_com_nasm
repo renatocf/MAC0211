@@ -1,0 +1,6 @@
+Precisamos chamar o NASM com um parâmetro para código objeto
+de Linux (padrão é windows). Usamos a opção -f elf64 ou -f elf32
+(de acordo com cada programa). Para sair com um certo nome, usamos
+o 
+
+Para fazer a linkagem, rodamos o 'ld'

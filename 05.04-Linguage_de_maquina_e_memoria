@@ -1,0 +1,56 @@
+; Exemplo de programa:
+    
+      MOV ECX,0AH   ; ecx <- 10
+      MOV EAX,EXC   ; eax <- 10
+loop: ADD EAX,EAX   ; eax <- eax+ex
+      DEC ECX         
+      JNZ loop      ; repete 10 vezes
+
+Podemos, com uma tabela, ver como as instruções são representadas
+em código de máquina (todas usam 1, 2 ou até 6 bytes):
+
+    INSTRUÇÃO   |  1º Byte  |  2º Byte  | 4 bytes |
+    MOV reg,reg | 89H       | 11SS SDDD |         | 
+    MOV reg,con | 1011 1DDD |           |    X    |
+    ADD reg,reg | 01H       | 11SS SDDD |         |
+    DEC reg     | 0100 1DDD |           |         |
+    JNZ con     | 0FH       |    85H    |    X    |
+
+    - MOV reg,reg começa com 89H e armazena os registradores na forma
+    11SSSDDD (SSS a origem (start), DDD o destino).
+    - O MOV com uma constante salva o destino junto do primeiro byte e
+    coloca as constantes nos 4 bytes adicionais.
+    - O ADD coloca no 1º byte sua identificação e os endereços no 2º.
+    - O DEC armazena o destino da operação ainda no 1º byte.
+    - O JNZ tem um padrão para Jumps (0FH no primeiro byte), o tipo 
+      dele no 2º byte (85H no segundo) e nos outros 4 bytes coloca
+      o endereço para o qual irá pular. 
+    
+    Vamos exemplificar com linguagem de máquina:
+    
+    ENDEREÇO    CÓDIGO DE MÁQUINA
+    --------------------------------------------------------------
+    0H          1011 1001              ; MOV reg,con (10111001 é o o 
+                                       ; 89H em binário)
+    2H          0A0H      | 00H        ; 4 bytes correspondentes ao 
+    4H          00H       | 00H        ; valor A em hexadecimal salvo
+    --------------------------------------------------------------
+    5H          89H       | 11 001 000 ; 000 é o EAX e 001 o EBX
+    --------------------------------------------------------------
+    7H          01H       | 11 000 000 ; adiciona EAX (000) à EAX
+    --------------------------------------------------------------
+    9H          01001001               ; decrementa ECX (001)
+    --------------------------------------------------------------
+    0AH         0FH       | 85H        ; define jump e o tipo de comparação
+    0CH         07H       | 00H        ; local para o qual pularemos (o 7H)
+    0EH         00H       | 00H        ; (no resto, colocamos 0's)
+    --------------------------------------------------------------
+    10H         85H       | 12H        ; A declaração de variáveis
+                                       ; já inicializadas fica após
+                                       ; este código todo, depois do
+                                       ; programa. Como dito, o dígi-
+                                       ; to menos significativo vem 
+                                       ; antes (por isso 85H está an-
+                                       ; tes de 12H para o 1285H).
+    --------------------------------------------------------------
+    12H --> restante da memória...

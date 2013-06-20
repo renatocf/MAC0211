@@ -1,0 +1,24 @@
+SNUM: RESB 5
+NUM : DW   524
+
+|       |       |
+ 8 bits   8bits
+
+141 !+ 4
+O caractere ASCII não é assim:
+Precisamos somar o valor de '0' + 4 = '4'
+
+524 mod 10 = 4
+52 mod 10 = 2
+5 mod 10 = 5
+
+SNUM[2] <- '3'   
+    MOV [SNUM+2],'3' ; fazemos uma atribuição e adicionamos a um endereço
+
+SNUM ----> AH |///////|
+endereços: BH |  '3'  |
+           CH |       |
+              |       | 
+
+Assim, para podermos somar números que representamos em decimal (e que
+têm várias casas), precisamos criar operações mais complexas.

@@ -1,0 +1,84 @@
+SISTEMAS OPERACIONAIS
+
+|-------------------------------------------|
+| Browser      |      Jogos      | Office   | } Aplicativos
+|-------------------------------------------|
+| Compiladores | Interpretadores | Editores | }
+|              |   de comandos   |          | } PROGRAMAS DE SISTEMA
+|             SISTEMA OPERACIONAL           | }
+|-------------------------------------------|
+|            LINGUAGEM DE MÁQUINA           | }
+|              MICROARQUITETURA             | } HARDWARE
+|            DISPOSITIVOS FÍSICOS           | }
+|-------------------------------------------|
+
+Funções de um sistema operacional:
+* Máquina estendida ou máquina virtual: fornece ao usuário interfaces que
+facilitam a interação com o hardware (ex: serviçoes que podem acessar
+por meio de chamadas ao sistema - compiladores)
+
+* Gerenciador de recursos: gerenciar utilização do potencial do hardware
+de acordo com os diferences softwares.
+
+Motivalção para o desenvolvimento dos SOs:
+* Primeira fase: hardware muito mais caro que a mão de obra
+  especializada (OBJETIVO: melhorar o hardware e sua utilização)
+
+* Segunda fase: hardware barato, desenvolvimento de software facilitado
+  (OBJETIVO: aumentar a usabilidade dos SOs)
+
+Evolução dos sistemas de computadores
+1 - Computadores a válvulas - sistemas sem SO algum
+2 - Computadores a transistores - sistemas em lote (batch)
+    (Primeiros dispositivos de I/O: cartões perfurados. Cada programa
+    era rodado um por vez. A única melhora nesse sistema era permitir
+    que enquanto um programa fosse lido/impresso (pelos cartões), outro
+    processo poderia ser rodado pelo processador. Os resultados saíam
+    apenas quando o 'lote' (batch) saia. Isso gerou outro problema: se
+    antes os computadores ficavam parados (enquanto processavam um tra-
+    balho), agora os programadores ficavam parados (enquanto esperavam
+    pelos batches)).
+3 - Circuítos integrados - sistemas multiprogramados/sistemas de tempo
+    compartilhado 
+    (Uma evolução em qua vários processos poderiam rodar, com o SO ad-
+    ministrando a execução dos processos passo a passo. Assim ,cada um
+    recebia pelo menos resultados parciais).
+4 - SOs modernos: Interfaces gráficos, redes
+    Programas modernos, voltados aos usuários, que permitiam gráficos,
+    janelas e inclusive acesso a outros computadores.
+
+MULTIPROGRAMAÇÃO x MULTIPROCESSAMENTO
+
+* Multiprogramação: diversos programas executando em um processador;
+* Multiprocessamento: diversos processadores (em um mesmoo sistema 
+                      operacional) executando programas distintos ou
+                      cooperando entre si para um mesmo processo.
+
+PROCESSOS
+Um processo contêm várias informações, dentre as quais inclui o 
+estado dos registradores.
+
+COMPONENTES DE UM SISTEMA OPERACIONAL
+
+* Escalonador de processos: determina quando e por quanto um processo
+é executado em um processador
+* Gerenciador de memória: determina quando e como a memória é alocada
+  aos processos e o que fazer quando a memória principal estiver cheia.
+* Gerenciador de E/S - atende às solicitações de entrada saída de/para
+  dispositivos de hardware
+* ICP - interface de comunicação de processos (os processos têm seus
+  dados 'guardados')
+
+MODO PRIVILEGIADO OU SUPERVISOR (NÚCLEO) x MODO USUÁRIO
+Serve para proteger o SO, limitando o acesso dos programas à
+modificações do sistema.
+
+ARQUITETURAS DE SOs
+
+* Monolítica: cada componente do SO é contido no núcleo e pode
+* comunicar-se diretamente com qualquer outro (por meio de chamadas à
+* função) [arquitetura mais antiga e comum]
+* Em camadas - agrupa em capadas os componentes de tarefas similares
+* Micronúcleo - fornece apenas um número pequeno de servições
+* Cliente-servidor: arquitetura em que há usuários e o superusuário, 
+  cada usuário tendo um modo de funcionar.

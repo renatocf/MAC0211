@@ -1,0 +1,98 @@
+FUNÇÃO DE CARREGAMENTO
+
+                |----------| --> Bloco de controle do processo
+|----------|--->|----------|
+|          |    |          |
+| PROGRAMA |    | PROGRAMA |
+|          |    |          |
+|----------|--->|----------|
+|          |    |          |
+|  DADOS   |    |  DADOS   |
+|          |    |          |
+|----------|--->|----------|
+                |          |
+ Código objeto  |  pilha   |
+                |          |
+                |----------|
+
+ESQUEMA DE ADIÇÃO DE BIBLIOTECAS ESTÁTICAS/DINÂMICAS
+| Biblioteca |
+|  Estática  |-->|
+                 |         bibliotecas dinâmicas --||
+|  Módulo 1  |-->|                                 \/         |programa|
+                 |--> ligador --> carregar --> carrregador -> | dados  |
+|  Módulo 2  |-->|                módulos                     | pilha  |
+     ...         |                                            |  ...   |
+|  Módulo n  |-->|                                            |  ...   |
+                       bibliotecas --> | ligador/    | -----> | dados/ |
+                        dinâmicas      | carregador  |        | código |
+                                       | em tempo    |
+                                       | de execução |
+
+BIBLIOTECAS ESTÁTICAS
+* Vantagens:
+  Não há risco de não localizar a biblioteca em tempo de execução
+* A versõa das bibliotecas é fixa, e não há problemas de descantagens
+* Mudanças no comportamento das bibliotecas novas não afetam a corretude
+  dos programas antigos
+* A carga de programas com essas bibliotecas é mais rápida
+
+* Desvantagens:
+* Tamanho do executável é maior
+* O código da biblioteca é adicionado ao código executável mesmo que em 
+  tempo de execução ele não seja usado.
+
+BIBLIOTECAS ESTÁTICAS E DINÂMICAS DO LINUX
+* Bibliotecas estáticas: extensão .z
+* Bibliotecas dinâmicas: extensão .so
+
+Convenções:
+* Nomes de bibliotecas geralmente têm o prefixo LIB (ex: libc)
+
+No GCC, na ligação, a referência à biblioteca (na linha de comando) por
+meio do parâmetro -l não conterá o sufixo e nem a extensão do nome da
+biblioteca. Ex:
+* Biblioteca matemática: /usr/lib/libm.so
+* Biblioteca para o uso de threads: /usr/lib/libthread.so
+As bibliotecas do GCC geralmente são construídas utilizando a 
+ligação DINÂMICA. Para fazermos com que ela seja estática, de-
+vemos colocar a opção -static
+
+CRIAÇÂO de BIBLIOTECA ESTÁTICA
+* Passo1: gerar os códigos-objteo das fontes que farão parte da
+  biblioteca estática
+* Passo2: executar o comando 'ar' para 'compactar' os ebjetos em um
+  único arquivo de extensõa .a
+
+EXEMPLO:
+$ gcc -c calc_media.c -o calc_med0a.o
+$ gcc -c calc_dp.c -o calc_dp.o
+$ ar -rcv libestat.a calc_media.o calc_dp.o
+
+Para listar os objetos existentes de uma bilioteca estática, podemos
+usar "ar -t"
+
+CRIAÇÃO DE UMA BIBLIOTECA DINÂMICA
+* Passo1: gerar os códigos objetos das fontes que farão parte da
+  biblioteca dinâmica usando a opção -fPIC (independente da posição -
+  que funciona corretamente não importa onde for colocado)
+* Passo2: usar a opção -shared do GCC para gerar o .so
+
+LIGANDO AS BIBLIOTECAS
+
+Se a biblioteca estiver em algum lugar diferente, é necessário
+utilizar a opção -L para o LIGADOR procurar a biblioteca neste local.
+
+Isso, porém, não funciona para as bibliotecas dinâmicas. Existem al-
+gumas soluções para isso:
+1) Mexer na variável ambiente LD_LIBRARY_PATH:
+    $ export LD_LIBRARY_PATH=/home/renatocf/libs:$LD_LIBRARY_PATH
+
+Podemos usar o programa "ldd" para mostrar quais as dependências 
+de bibliotecas dinâmicas para o programa.
+
+VARIÁVEIS DE AMBIENTE RELACIONADAS À BIBLIOTECAS
+* LD_LIBRARY_PAH - indica ao ligador onde pefar as bilbiotecas dinâmicas
+* LD_PRELOAD - lista de bibliotecas a serem carregadas antes de todas
+  as outras
+* LD_NOW(on/off) - vê se a ligação

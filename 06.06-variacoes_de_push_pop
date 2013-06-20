@@ -1,0 +1,19 @@
+FORMATOS:
+
+* PUSHA (sem operandos); push all
+    Empilha os valores de todos os registradores de uso ggeral
+    da arquitetura 80x86. Os registradores são empilhados na
+    seguinte ordem: eax,ecx,edx,ebx,esp,ebp,esi,edi
+
+* POPA ; análogo, mas RETIRANDO da pilha
+    Desempilha o valor de todos os registradores de usa geral
+    da arquitetura 80x86. Os registradores são desempilhados 
+    na ordem inversa à usada no PUSHA.
+    O POPA só funciona corretamente quando chamamos o PUSHA,
+    embora ele vá colocar quaisquer valores (pegando os úl-
+    timos e colocando-os nos registradores na ordem acima. É
+    necessário tomar MUITO cuidado).
+
+    Esses comandos são úteis para salvar um estado dos registra-
+    dores antes de realizarmos algum tipo de processo. Depois de
+    usá-los, podemos recuperá-los.

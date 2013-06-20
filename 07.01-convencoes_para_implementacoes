@@ -1,0 +1,22 @@
+Vimos na última aula algumas convenções para a criação de função: com
+'push' e 'pop' podemos salvar o estado do sistema quando da chamada da
+função e depois podemos colocar as informações de volta. Os parâmetros
+podem ser passados a partir de alguns ponteiros e o retorno geralmente
+fica em EAX (ou derivados).
+
+Considerações gerais:
+Funções são implementadas em sub-rotinas (com CALL e RET).
+A passagem de parâmetros é feita via pilha;
+A pilha também é usada para armazenar as variáveis locais da função;
+... (ver slides)
+
+Responsabilidade do chamador: 
+empilhar parâmetros;
+chamar função;
+liberar espaço dos parâmetros.
+
+Responsabilidade da função chamada:
+salvar BP do chamador
+salvar todos os registradores que vão ser afetados
+alocar espaço para variáveis locais
+... (ver slides)

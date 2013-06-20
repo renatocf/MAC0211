@@ -1,0 +1,98 @@
+NASM: Estrutura de um programa
+
+.text: código-fonte
+.data: variáveis inicializadas
+.bss: variáveis não inicializadas
+
+VARIÁVEIS
+
+    - Um nome simbólico para um dado utilizável pelo programa
+    - Cada variável possui um 'tipo' e recebe um endereço de 
+      memória (o tipo serve para conseguir ver qual o tamanho
+      necessário. Como a psição de memória é variável, para
+      poder achar o endereço e passá-lo a um comando, colo-
+      camos o nome entre []).
+    - O montador é quem atribui o endereço de memória
+    - Nomes de cariáveis, constantes e rótulos DEVEM:
+        * Conter soente letras, números ou os caracteres:
+          '_', '$', '#', '@', '~', '.' e '?'
+        * Iniciar por letra '_', '?' ou '.' (sendo que o uso do
+          ponto denota um rótulo local¹)
+        
+        RÓTULO LOCAL:
+                     MOV EAX,10
+                     MOV ECX,15
+            loop:    ADD EAX,EAX
+                     DEC ECX
+                     ...
+            .loop_i: MOV EDX,0
+                     ...
+                     JMP loop_i
+        ; A vantagem é que podemos usar este conceito para aproveitar
+        ; nomes de rótulos. Se criássemos 'seções' no código, podería-
+        ; mos colocar 'loop' em cada uma, e os jumps veriam o fato de-
+        ; las estarem aninhadas.
+
+DECLARAÇÃO DE VARIÁVEIS INICIALIZADAS
+    PSEUDO-INSTRUÇÕES
+    A declaração de variaveis inicializadas é feita na seção .data,
+    com o uso de pseudo-instruções (os "tipos"). A diferença de ins-
+    truções reais é que elas não são convertidas para linguagem de 
+    máquina.
+    
+    DB - define byte - tipo para 1 byte
+    DW - define word - topo para 2 bytes
+    Ex:
+        NOME
+        NUM1: DB 64 ; legal - 64 decimal aceita 1 byte
+        NUM2: DB 0150h ; ilegal: o hexadecimal é maior que 1 byte
+        NUM3: DW 0150h ; legal: o hexadecimal cabe, e o menos signi
+                       ; ficativo fica na primeira posição de memória
+                       ; e o mais na segunda;
+        VET: DW 01h,02h,03h ; está criando os valores sequencialmente
+                              como num vetor
+        PALAVRA: DW 'He' ; guarda um caracter
+        STRING: DW 'He,'ll','o ','Wo','rl','d'
+                ; guarda em sequência;
+    
+    
+DECLARAÇÃO DE VARIÁVEIS NÃO INICIALIZADAS
+    PSEUDO-INSTRUÇÕES
+    A declaração de variaveis não inicializadas é feita na seção .bss,
+    com o uso de pseudo-instruções (os "tipos"). A diferença de ins-
+    truções reais é que elas não são convertidas para linguagem de 
+    máquina.
+    
+    RESDB - define byte - tipo para 1 byte
+    RESDW - define word - topo para 2 bytes
+    Ex:
+        NOME
+        NUM1: RESDB 
+        NUM2: RESDB
+
+DECLARAÇÃO DE CONSTANTES 
+    PSEUDO-INSTRUÇÕES
+    A declaração de variaveis inicializadas é feita na seção .data,
+    com o uso da pseudo-instrução 'EQU'. No GAS, constantes são 
+    feitas apenas com o sinal '='
+        
+    RESDB - define byte - tipo para 1 byte
+    RESDW - define word - topo para 2 bytes
+    Ex:
+        NOME
+        NUM1: EQU 2 
+        NUM2: QEU 'Hello, World'
+
+USANDO VARIÁVEIS
+    Usamos a variável colocando seu nome. E para se referenciar à
+    seu endereço, colocamos o nome entre [].
+
+DIFERENÇAS DE SINTAXE INTEL(NASM)/AT&T(GAS):
+    
+                        AT&T                Intel
+    Ordem:          MOV origem,dest     MOV dest,origem
+    Decl.var:       var1: .int valor    var2: DB valor
+    constante:      cons1 = valor       cons2  EQU valor
+    registradores:  MOV %eax,%ebs       MOV ebx,eax
+    
+    comentários:    # comentário        ; comentário

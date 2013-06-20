@@ -1,0 +1,43 @@
+RELEMBRANDO - O processo de Compilação
+
+Um compilador ou interpretador para uma linguagem de programação
+é geralmente decomposto em duas subtarefas:
+1 - Ler o código fonte e descobrir sua estrutura
+2 - Processar essa estrutura, geralmente para gerar um código
+    execuáveil
+
+A primeira tarefa também pode ser dividida em duas:
+1 - Dividir o arquivo de entrada em 'tokens' (itens léxicos) → 
+    análise léxica
+    - Faz a separação E a classificação das palavras contidas
+      no texto. Define também a que subcategorias ele pertence.
+      Ex:
+        if(var == 0) then
+        - if   : palavrar reservada
+        - (    : operador
+        - var  : identificador
+        - ==   : operador
+        - 2    : número
+        - then : operador
+2 - Encontrar a estrutura hierárquica do programa → análise sintática
+
+ESTRUTURA GERAL DA COMPILAÇÃO
+
+ analisador    analisador    analisador   otimizador    Gerador de
+   léxico   →   sintático →  semântico →  (opcional) →    código 
+  (scanner)     (Parser)                                executável
+
+O analisador léxico geralmente cria uma TABELA entre estruturas
+                                   
+    .---------.---------------.            .---.
+    | LEXEMAS | token         |            | = |
+    |---------|---------------|            /---\
+    | var1    | variável      |    .------/     \.---.
+    | =       | atribuição    |    | var1 |      | - |
+    | 1       | número        |    '------'      /---\  
+    | -       | subtração     |             .---/     \.----.
+    | 3       | número        |             | 1 |      | ** |
+    | **      | exponenciação |             '---'      /----\
+    | 2       | número        |                  .---./      \.---.
+    '---------'---------------'                  | 3 |        | 2 |
+                                                 '---'        '---'

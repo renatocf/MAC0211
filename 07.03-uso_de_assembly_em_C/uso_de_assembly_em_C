@@ -1,0 +1,30 @@
+Convenções:
+
+Parâmetros da função passados pela pilha
+parametros empilhados da direita para esquerda
+retorno recebido em eax
+
+.intel_syntax noprefix 
+Diretiva para dizer que estamos usando a sintaxe da intel 
+Noprefix fala que não queremos usar os % em frente aos registradores
+
+Compilando com o gcc: gcc -m32 prog.c prog.s
+    $ m32: gera ao executável para 32 bits (-m64)
+    $ -o prog: gera o executável
+    
+    As extensões precisam ser .s para o gcc
+    saber que o código é de máquina.
+    
+    Sempre devemos usar comentários no formato '#'
+    Para compilar 32 bits em um computador 64 bits,
+    pode ser necessário baixar o pacote 'gcc-multilibs'
+    
+Compilando com o NASM:
+    $ as --32 -o soma.o soma.s
+    $ gcc -c -m32 -o prog.o prog.c
+    
+    Ligação:
+    $ gcc -o prog -m32 prog.o soma.o
+
+Devemos padronizar tamanhos: para C em 32 bits, long e int são ambos 4
+bytes e long long, 8. Para 64, int tem 4, long, 8 e long long 16 bits.

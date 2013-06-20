@@ -1,0 +1,3 @@
+Para passar argumentos em 64 bits, usamos os registradores, e não a
+piha, para podermos passar os argumentos (RPB e RSP não são acessíveis,
+pois armazenam endereços.

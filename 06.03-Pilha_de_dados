@@ -1,0 +1,68 @@
+Os programas criam 'pilhas' para poderem manter seus dados
+alocados dinamicamente. ELa funciona no sentido contrário ao
+da leitura do proframa (no sentido inverso).
+
+06H |       |
+07H |       |
+08H |       | 
+09H |       | } 1 byte <- ESP: aponta para o topo da pilha
+0AH |       | } WORD (2 bytes)
+    |-------| } <- EBP: aponta para a base da pilha
+0BH |       |
+0CH |       |
+0DH |       |
+0EH |       |
+
+Dentre os registradores, temos vários de uso geral: 
+EAX, EBX, ECX, EDX
+
+Porém, temos alguns especiais:
+EIP = instruction pointer (aponta qual instrução executar)
+EBP = base pointer 
+ESP = stack pointer
+
+O programa faz tudo isso na parte reservada para ele pelo sistema 
+operacional, e usa estes registradores para mexer com a pilha.
+
+--------------------------------------------------------------------
+
+"Definição"
+É uma posrção da memória compartilhada com o sistema operacional.
+Ela tem uma filosofia de 'último a entrar, primeiro a sair' (FIFO).
+
+--------------------------------------------------------------------
+APONTADORES:
+
+REGISTRADOR EBP (base pointer)                      |       |
+* Armazena o endereço da base da pilha.             |ddddddd| <- ESP
+                                                    |ddddddd|
+REGISTRADOR ESP (stack pointer)                     |ddddddd| <- ESB
+* Armazena a última posição USADA na pilha          |       |
+
+
+--------------------------------------------------------------------
+OPERAÇÕES DE MANIPULAÇÃO DA PILHA
+
+Formato: PUSH reg/mem/const
+
+    Armazena o valor do operando no topo da pilha. O númro de bits que
+    serão armazenados da pilha é definido pelo tamanho do operando.
+    Obs: NÃO PODE SER APLICADA A REGISTRADORES DE 8 BITS.
+
+    Exemplo: PUSH EAX
+    que equivale a: SUB ESP,4
+                    MOV [ESP+ESP],EAX
+
+    Adicionamos um valor à pilha, de acordo com o tamanho desta. Usamos
+    uma subtração porque a pilha vai no sentido INVERSO. Regredimos na 
+    memória para colocar a informação.
+
+
+Formato: POP 
+    Ex: POP BX
+    que equivale a: MOV [ESP+ESP],BX
+                    ADD ESP,2
+
+    Retiramos um valor da pilha, de acordo com o tamanho desta. Usamos
+    uma adição porque a pilha vai no sentido INVERSO. Avançamos na 
+    memória para tirar a informação.

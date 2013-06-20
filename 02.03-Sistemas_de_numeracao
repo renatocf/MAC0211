@@ -1,0 +1,70 @@
+SISTEMAS DE NUMERAÇÃO
+
+O ENIAC usava o sistema de numeração decimal. Depois deles, todos
+os computadores eletrônicos usam em seus cálculos aritméticos o
+SISTEMA DE NUMERAÇÃO BINÁRIO (o decimal exigia válvulas girando
+que eram muito lentos para o processamento - cada válvula tinha 10
+posições).
+
+SISTEMA DECIMAL
+
+* Usa 10 dígitos distindos: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+* É um sistema posicional:
+  - Valor de um dígito depende da posição em que ele se encontra
+    no conjunto de dígitos que representa uma quantidade
+  - O valor total do número é a soma dos valores relativos de cada
+    dígito.
+
+    573: 5*10^2 + 3*10^1 + 3*10^0
+
+SISTEMA BINÁRIO
+
+* Usa dois dígitos distintos: (0, 1)
+* Estrutura de pesos dos números binátios:
+  ..2^5 2^4 2^3 2^2 2^1 2^0 2^-1 2^-2..
+
+* Conversão de binário para decimal:
+    (11001)_2 = 1*2^4 + 1*2^4 + 0*2^2 + 0^2^1 + 1*2^0 = 25
+* Conversão de decimal para binário:
+    Método das divisões sucessivas:
+    25/2 = 12 resto 1 ^ 
+    12/2 =  6 resto 0 | 
+     6/2 =  3 resto 0 | Pegamos o número
+     3/2 =  1 resto 0 | binário na ordem inversa
+     1/2 =  0 resto 1 | 
+
+    Método das multiplicações sucessivas (< 0):
+    Para 0.25:
+    0.25 * 2 = 0.5
+    0.5  * 2 = 1
+               ^-- Pegamos os inteiros, na ordem gerada
+    
+* Operações com binários:
+    Soma:  '1           Binário     Decimal
+         '1 1 1 1 1           0     1           
+          1 0 1 0 0           1     2           
+        -----------          10     3           
+        1 0 0 0 1 1          11     4           
+                            100     5           
+                            101     6           
+                            110     7           
+                            111     8           
+    ----------------- } 
+    | | | | | | | | | } A posibilidade de representar 2 símbolos
+    ----------------- } em cada posição faz com que em 8 bits, 
+                        possamos representar 2^8-1 números dife-
+                        rentos (0 a 255, sem sinal)
+    
+    Subtração   
+    1 - 1 = 0   |       0 10 
+    1 - 0 = 0   |         1 10
+    0 - 0 = 0   |   1 1 1 0 0
+    10 - 1 = 1  |     1 0 0 1
+                |   ---------
+                |   0 0 0 1 1
+        
+        
+        
+        
+        
+            

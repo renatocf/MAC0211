@@ -1,0 +1,56 @@
+SUBROTINAS (= SUBPROGRAMAS)
+------------------------------------------------------
+
+* São usadas para implementar tarefas complexas usando componentes
+mais simples.
+* Melhoram a legibilidade do código e facilitam sua manutenção (para
+evitar replicações).
+* Podem ser chamadas como se fossem uma isntrução presente na lin-
+guagem de programação usada.
+* Em linguagem de montagem, podem ser implementadas com auxílio das
+instrução CALL e REL.
+
+Formatos:
+
+* CALL rot
+    Salva na pilha o endereço da instrução seguinte a execução 
+    para o endereço espeficificado pelo rótulo.
+    Equivale a (se pudéssemos manipular o registrador EPI)
+        PUSH EPI
+        JMP rot
+
+* RET
+    Recupera da pilha o endereço da instrução a ser executada na 
+    sequência e depois transfere a execução para esse endereço.
+    Equivale a (se pudéssemos usar um registrador para especificar o
+    destino de um salto):
+        POP EBX
+        JMP EBX
+        Essa estrutura NÃO funciona porque se criássemos uma subro-
+        tina para vários locais, provavelmente não conseguiríamos 
+        dar um HMP de volta.
+            
+    Ex:
+    _start
+        ...
+        calll abre_arq
+        ...             ; faz operações de manipulaçãp do arquivo
+        ...             ; faz outras operações quaisquer
+        call fecha_arq
+        ...
+
+    abre_arq:
+        ...
+        mov eax,5       ; chamada ao sistema (open)
+        int 80h
+        ret             ; volta ao endereço de EPI
+
+    fecha_arq:
+        ...
+        mov eax,6       ; chamada ao sistema (close)
+        int 80h
+        ret             ; volta ao endereço de EPI
+
+--------------------------------------------------------------------
+O ESP está na última posição porque só sabemos o quanto devemos 
+'subir' na pilha quando temos novos valores.

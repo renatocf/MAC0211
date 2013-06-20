@@ -1,0 +1,52 @@
+A forma de passar argumentos via linha de comando temos o caso
+equivalente a acessar parâmetros de uma função (são passados por 
+meio de uma pilha). Por outro lado, na arquitetura de 64 bits, 
+estes parâmetros vêm utilizando  registradores.
+
+Exemplos de argumentos em C:
+    $ prog 1 "mac211" 23
+    Colocamos os argumentos na linha de comando utilizando-nos
+    de vários comandos em sequência.
+    
+    O primeiro parâmetro no main de c é um inteiro chamado 'argc',
+    o número de elementos no argumento.
+    Em seguida, vêm o endereço para o primeiro elemento de um ve-
+    tor de strings.
+    
+        int main(int argc, char **argv)
+        {
+        }
+    
+    C8D5 --> |       | --> |'p'|'r'|'o'|'g'|'\0'|
+             |       | --> |'1'|'\0'|
+             |       | --> |'m'|'a'|'c'|'2'|'1'|'1'|'\0'|
+             |       | --> |'2'|'3'|
+    
+    O argv aponta para um VETOR de endereços, sendo que estes apon-
+    tam para as posições da memória nas quais cada string para os
+    argumentos está.
+    
+    Quando passamos os paâmetros para a pilha, sempre temos os se-
+    guintes princípios:
+    
+        |           |      | argv[0] | --> |'p'|'r'|'o'|'g'|'\0'|
+        |           |      | argv[1] | --> |'1'|'\0'|
+        |           |      | argv[2] | --> |'m'|'a'|'c'|'2'|'1'|'1'|'\0'|
+        |           |     >| argv[3] | --> |'2'|'3'|
+        |           |     |
+        |           |     |
+        |           | ESP |
+        |    EIP    | ----|
+   argc |     4     | (4 bytes)
+   argv |   C8D5    | (4 bytes)
+        | ????????? |
+        | ????????? |
+    
+    Quando chamamos o main, criamos uma nova função e, por isso, te-
+    mos um DESLOCAMENTO do EIP (que guarda o endereço da base da pi-
+    lha). Por esse motivo, precisamos saber sempre que o argc está 
+    4 bytes abaixo da pilha e o argv, 8 bytes abaixo, quando começa-
+    mos o programa.
+    
+    Na arquitetura de 64 bits, não será importante esse fato pois os
+    argumentos vão para os registradores.

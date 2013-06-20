@@ -1,0 +1,30 @@
+AUTOCONF
+
+* É um script de configuração que serve para auxiliar na criação
+de softwares portáteis. Eles verificam as dependências que o pro-
+grama pode ter, indicam quais as localizações na máquina e gera
+o executável baseado nestas localizações. Ele permite que compi-
+lemos o programa em vários SO's.
+* A aborfagem do Autoconf para conseguir um alto grau de portabi-
+lidade é verificar a presença de funcionalidades, ao invés de ve-
+rificar as versões das ferramentas.
+* A saída do Autoconf é um programa de configuração que é colocado
+junto ao códigofonte
+* Seu código-feonte deve estar preparado, fazendo testes especiais 
+e adaptando-se às dicersas situações de um modo padronizado.
+* Também precisamos de um makefile especial - o Makefile.in, em 
+que usamos o M4 para abrir as macros.
+* O autoconf gera o scritp 'configure', que gera:
+    * um ou mais arquivos makefiles;
+    * um cabeçalho C (chamado geralmente config.h)
+    * um script shell para as configurações necessárias
+* Um dos possíveis roteiros para o uso de Autoconf:
+    1. Tode o programa 'autoscan' em seus códigos-fonte. A saída
+       será um arquivo configure.scan
+    2. Faça ajustes manuais no configure.scan e, se necessário, 
+       salve o resultado em configure.ac
+    3. Rode o programa 'autoheader', que gererá o config.h.in 
+       (template para o config.h)
+    4. ROde o 'autoconf' para gerar o 'configure'
+    Tanto o autoheader quanto o autoconf usam o configure.ac como
+    entrada.

@@ -1,0 +1,4 @@
+COMO GERAR EXECUTÁVEIS 
+
+nasm 0f elf32 nome_do_programa32
+

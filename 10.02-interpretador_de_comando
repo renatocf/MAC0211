@@ -1,0 +1,32 @@
+DEF: É um programa que implementa uma INTERFACE DE LINHA DE COMANDO.
+     Essa, por sua vez, permite que usuários submetam comandos a um 
+     programa de computador por meio de linhas sucessivas de texto
+     (ou seja, as linhas de comando)
+     
+    SHELL = interpretador de comandos para um SO
+    * É interface priméria existente entre um usuário e um sistema
+      operacional quando o usuário não está usando uma interface
+      gráfica
+    * por meio de um Shell, um usuáriopode fazer um uso 'intenso' das
+      funcionalidades do SO
+
+    Em computação, o nome Shell pode designar qualquer programa que
+    sirva de 'casca' entre usuários e o núcloe do SO ou até outros 
+    programas/linguagens (Perl e Pyton).
+    
+    Nos SOs originados do Unix shell assume um significado mais espe-
+    cíficado - os que são de modo texto.
+    
+    Existem dicersas implemetações:
+    * Windows: command.com, cmd.exe (Command), PowerShell
+    * MAC OS: Terminal.app (Terminal)
+    * Unix: sh (Bourne Shell), csh (C shell), bash (Bourne-Agein shell)
+      ksh (Korn shell), ash (Almquist shell)...
+    
+    O Bash é o shell mais comum entre as diversas distribuições de 
+    Linux. O Bash surgiu de uma junção so shell básico com conceitos
+    do csh. Os shells de Linux têm, em geral, diferenças de licença
+    também.
+    
+    Apesar de várias mudanças com o tempo, o bash e o shell original
+    continuam ainda sendo usados. 

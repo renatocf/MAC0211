@@ -1,0 +1,8 @@
+$ gcc -S -m32 -nasm=intel -fverbose-asm programa.c
+
+* -S: gera código em linguagem de montagem
+* -m32> gera código para arquitetura de 32 bits
+* -nasm=intel: gera código na sintae intel (pa-
+               drão é a AT&T
+* fverbose-asm: inclui comentários que (possi-
+                velmente) auxiliem.

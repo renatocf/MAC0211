@@ -1,0 +1,39 @@
+Todo objeto do sistema de arquivos do UNIX (arquivo/diretório)
+* Pertence a um usuário e a um grupo
+* Possui 3 conjuntos de permissões, que definem os modos de acesso
+  permitido:
+  * ao usuário dono do objeto: owner(u);
+  * aos membros do grupo do objeto: group(g);
+  * a todos os usuários do sistema: others(o);
+* Há 3 modos de acesso possíveis:
+  * r - leitura (read);
+  * w - escrita (write);
+  * x - execução (execution)
+
+COMANDO PARA PERMISSÃO: CHMOD
+
+O comando chmod altera as permissões de acesso de objetos do sistema
+de arquivos. O comando pode ser usado em dois modos: octal ou simbólico
+
+* chmod <modo> <arquivo(s)>
+  onde modo é um número de três dígitos obtido por meio da tabela
+  abaixo. Exemplo:
+  chmod 664 arq_compartilhado
+  (o comando atribui as permissões de leitura e escrita para o dono 
+  e o grupo, e somente leitura para outros usuários)
+  
+  Modo octal:
+                             u   g   o
+                          0 000 000 000
+                          1 001 001 001
+                          2 010 010 010
+                          3 011 011 011
+                          4 100 100 100
+                          5 101 101 101
+                          6 110 110 110
+                          7 111 111 111
+
+  Modo simbólico:
+    Usa os operadores + (para adicionar), - (para retirar) e = (para
+    atribuir) juntamente com as opções u, g, o antes deles. Ex:
+    chmod u+x executavel

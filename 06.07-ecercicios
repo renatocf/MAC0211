@@ -1,0 +1,18 @@
+1.  Faça uma função receba cmo parâmetro de entrada um número inteiro
+    'i' e uma string 's' (= endereço de um vetor de caracteres), 
+    transforme 'i' em string e armazenee em 's'.
+2.  Faça uma função que reveba como parâmetro de entrada um 
+    número inteiro 'i' e uma 'string s' (= endereço de um vetor
+    de caracteres), e armazena em 's' a representação em hexade-
+    cimal do número.
+    Dica: você pode usar oprações lógicas e rotações (SHR e SHL)
+    para obter bits específicos de um número. Ex:
+        
+        SHR EAX,4
+    
+    rotaciona EAX 4 bits à direita.
+    
+    | 0010 | 0011 | EBX
+     ^^^^^^ ^^^^^^
+       2H     3H    = 23H
+    | 00000010 |

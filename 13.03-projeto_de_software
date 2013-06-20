@@ -1,0 +1,106 @@
+ESSÉNCIA DO 'PROJETAR UM SOFTWARE'
+* Equilibrar objetivos e restrições concorrentes
+
+-----------------------------------------------------------------------
+QUESTÕES A SEREM TRABALHADAS NO PROJETO
+
+* Interfaces: 
+    Quais são os serviçoes e acessos fornecidos?
+* Ocultamento de informações: 
+    Quais informações são visíveis e quais são privadas?
+* Gerenciamento de recursos: 
+    Quem é responsável por gerenciar memória e outros recursos 
+    limitados?
+* Tratamento de erros: 
+    Quem detecta os erros, quem os reporta, e como?
+
+-----------------------------------------------------------------------
+PROJETO DE INTERFACES
+    
+   "Interfaces entre usuários, programas e partes de programas são
+    fundamentais na programação e grande parte do sucesso de um software
+    é determinado por quão bem suas interfaces são projetadas"
+
+    Para ser bem sucedida, ma interface precisa ser bem adaptada à 
+    uma terefa. Ela deve ser: 
+    * Unificada:  possuir um tema que unifique suas funções
+    * Simples:    procurar esconder a complexidade de suas
+                  implementações.
+    * Suficiente: prover as funcionalidades necessárias para 
+                  satisfazer as necessidades dos usuários.
+    * Genérica:   ser suficientemente flexível para atender as 
+                  necessidades de diferentes tipos de usuários.
+    * Estável:    mander a estrutura e efeito de suas funções, 
+                  mesmo quando as implementações são mdificadas.
+
+    Princípios de uma INTERFACE
+    * Oculte os detalhes de implementação (= encapsulamento, 
+      abstração, modularização);
+    * Escolha um conjunto ortogonal e pequeno de funções;
+      (ideia da simplicidade e de tudo que a biblioteca provê)
+    * Não saia do alcance do usuário;
+    * Faça uma mesma coisa igual em todos os lugares.
+
+    -> Ocultação dos detalhes de implementação
+        A implementação de uma interface deve ficar oculta, de 
+        modo que ela possa mudar sem afetar (negativamente) os 
+        sistemas que a usam.
+        
+        Dicas:
+        * Evite o usu de variáveis globais; sempre que possível,
+          é melhor passar os dados por meior de parâmetros para 
+          as funções;
+          (quando é inevitável usá-las, é ideal tomar cuidado 
+          com o que se está fazendo);
+        * Não use dados que semrpe estão 'visíveis'; é difícil 
+          manter a consistência dos valores quando usuários po-
+          dem alterar variáveis de forma indiscriminada;
+        * Classes (de orientação a objetos) são um ótimo meca-
+          nismo de esconder informações.
+    
+    -> Escolha um conjunto ortogonal pequeno de funções
+        A interface deve prover tantas funcionalidades quanto o
+        necessário. Funções não devem se sobrepor excessivamente
+        no que se refere a suas funcionalidades.
+        
+        Observações:
+        * Ter muitas funções pode tornar uma bibliotecamais fácil
+          de ser usada, mas mais difícil de ser escrita e mantida;
+          (Esse é um problema típico da clib, que tem várias fun-
+          ções, por exemplo, para leitura de caracteres)
+    
+    -> Não sair do alcance do usuário
+        * Uma biblioteca não deve criar variáveis de ambiente ou
+          arquivos secretos, nem mudar os dados globais;
+        * Ela deve ser cuidadosa ao mudar dados de seu chamador;
+        * Uma biblioteca não deverequerer outra apenas para a 
+          conveniência do projetista da interface ou do implemen-
+          tador;
+        * É desejável que a biblioteca seja auto-contida. Quando 
+          isso não for possível, é preciso deixar explícito os ser-
+          viços externos que ela requer.
+          Caso não seja possível fazer isso, devemos documentar bem
+          as dependências da biblioteca.
+    
+    -> Fazer uma mesma coisa igual em todos os lugares
+        Consistência e regularidade são importantes
+        
+        * Coisas relacionadas devem ser alcançadas por meios
+          relacionados
+          BOM EXEMPLO: funções básicas 'str...' de C se comportam 
+                       de forma parecida - dados fluem da esquerda
+                       para a direita nos parâmetros e todas devol-
+                       vem a 'string' resultante.
+          MAU EXEMPLO: funções da biblioteca padrão de E/S de C, em
+                       que é difícil precer a ordem dos parâmetros
+                       para as funções - algumas possuem os parâme-
+                       tros 'FILE *' primeiro (scanf, printf); ou-
+                       tras, por último (fread);
+        
+        * Consistência externa de comportamento também deve ser um
+          objetivo.
+          BOM EXEMPLO: o parâmetro de linha de comando '-v' geral-
+                       mente habilita o modo 'verboso'
+          MAU EXEMPLO: o clique simples/duplo. Em browsers, um clique
+                       abre links. Nas interfaces gráficas, o suplo
+                       é a que abre.

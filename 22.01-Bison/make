@@ -1,0 +1,3 @@
+gcc    -c -o calcpr.yy.o calcpr.yy.c
+gcc -c calcpr.tab.c
+gcc calcpr.yy.o calcpr.tab.o -o calcpr -lfl -lm

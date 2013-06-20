@@ -1,0 +1,303 @@
+ARQUITETURAS - ENIAC
+    
+    |---------------------------------------|
+    |           |-------------|             |
+    |           |   Programa  |             |
+    |           |-------------|             |
+    |                                       |
+    |           |-------------|             |
+    |           | Controlador |             |
+    |           |-------------|             |
+    |                                       |
+    |   |-----|               |---------|   |
+    |   | UCP |               | Memória |   |
+    |   |-----|               |---------|   |
+    |---------------------------------------|
+
+ARQUITETURA DE VON NEUMANN
+    
+    |---------------------------------------|
+    | |----------------------------------|  |
+    | | |------------|    |------------| |  |
+    | | |  Programa  |    |    Dados   | |  |
+    | | |------------|    |------------| |  |
+    | |                                  |  |
+    | |         |-------------|          |  |
+    | |         | Controlador |          |  |
+    | |         |-------------|          |  |
+    | |----------------------------------|  |
+    |                                       |
+    |                 |-----|               |
+    |                 | CPU |               |
+    |                 |-----|               |
+    |---------------------------------------|
+
+
+              barramento de endereços
+       .-------------.--------------------.
+    |-----|    |----------|      |----------------|
+    | CPU |    |  MEMóRIA |      |  ENTRADA/SAída |
+    |-----|    |----------|      |----------------|
+       ^-------------^--------------------^
+                barramento de dados
+
+    O barramento de endereços envia endereços para acesso à memória
+    e à entrada e saída. O barramento de dados, por outro lado, trans-
+    mite a informação em si. Eles fazem uma comunicação entra dados
+    e são os cabo que as comunicam
+    
+    A CPU contêm:
+        Unidade Lógica e Aritmética (ULA)
+            Realiza todas as operações lógicas (and, or, not) e 
+            aritméticas (+, -, *, /)
+        Unidade de Controle (UC)
+            Controla as ações realizadas pelo computador, coordenando
+            as comunicações entre as peças.
+        Registradores
+            * Um registrador é uma coleção de circuítos que armazenam 
+            bits
+            * Os registradores de um processador não necessariamente 
+            armazenam a mesma quantidade de bits.
+            * Essa quantidade de bits é um dos atributos que classificam
+            os computadores (32-bits, 64-bits atualmente. O primeiro 
+            processador (Intel 4004) tinham 4 bits).
+            * Cada registrador possui uma função:
+                - Contador de programa (PC - program counter) - aponta
+                para a próxima instrução a executar;
+                - Registrador de instrução (IR - instruction register) - 
+                armazena a instrução em execução
+                - Armazenamento de resultados intermediários
+    
+    Processadores - conjunto de instruções:
+        * As instruções são as operações que um processador é capaz de
+        realizar; elas são a parte do processador que é "visível" para
+        os programadores.
+        * Cada processador possui o seu próprio conjunto de instruções.
+        Por meio de uma linguagem de montagem (assembly) podemos usar o 
+        conjunto de instruções diretamente.
+        * Mesmo preocessadores de arquiteturas diferentes podem ter o
+        mesmo tipo de sintaze (Intel Pentium e AMD Atlhon)
+        * Operações:
+            AS instruções se relacionam às seguintes funcionalidades:
+            - operações matemáticas e lógicas
+            - movimentação de dados (transferência de dados da memória
+              para os registradores e vice-versa)
+            - operações de entrada/saída (leitura e escrita de dads em
+              dispositivos de entrada/saída)
+            - controle de fluxo de execução (desvios condicionais)
+    
+    Processadores: CISC x RISC
+        * CISC: Complex Instruction Set Computer (CISC)
+          Capaz de executar várias centenas de instruções complexas
+          diferentes.
+        * RISC: Reduced Instruction Set Computer (RISC)
+          Capaz de executar apenas algumas poucas instruções simples
+          (= rapidez, menor custo)
+        * Exemplo:
+          Comando em linguagem de alto nível (C):
+              A = B + C   /* considerando que todas as quantidades 
+                             estão em memória */
+          
+          Em linguagem de um processador CISC:
+              add mem(B), mem(C), mem(A)
+              (Pegue B, C, some e ponha em A)
+          
+          Em linguagem RISC:
+              load mem(B), reg(1);
+              load mem(C), reg(2);
+              add reg(1), reg(2), reg(3);
+              store reg(3), mem(A)
+    
+    Processadores Intel de família x86
+        * Ótimo exemplo de processadores CISC
+        * Característica importante: processadores dessa família 
+          mantêm compatibilidade com os antecessores (mais novos 
+          executam comandos dos mais antigos)
+        * Processadores membros: 8086, 80186, 80286, 80386, 80484,
+          Pentium (Pro, II, III, 4), Core...
+    
+    Registradores do processador Intel 8080 (8 bits)
+    
+        8080
+    |-----------|                           |-----------|
+    |           |                         0 |           |
+    | |   A   | |                           |-----------|
+    |           |     Barramento de       1 |           |
+    |           |    endereço (8 bits)      |-----------|
+    | |   B   | | --------------------->  2 |           |
+    |           | --------------------->    |-----------|
+    |           |                         3 |           |
+    | |   C   | |                           |-----------|
+    |           |      Barramento de        |           |
+    |           |      dados (8 bits)       |-----------|
+    | |   D   | | <---------------------    |           |
+    |           | <---------------------    |-----------|
+    |           |                           |           |
+    | |   H   | |                           |-----------|
+    |           |                           |           |
+    |           |                           |-----------|
+    | |   L   | |                           |           |
+    |           |                           |-----------|
+    |-----------|                           
+    
+    Registradores de uso geral:
+    A (acumulador) - usado em movimentação de dados, op. arit., INN/OUT
+    B (base) - usado como ponteiro para acesso a memória, receve o 
+               valor de retorno de algumas interrupções
+    C (contador) - usado para controlar o número de vezes que um laço
+                   deve ser executado ou o número de shifts; também em
+                   op. arit;
+    D (dados) - usado em operações de INN/OUT; também para mutiplicação
+                e divisão de números grandes
+    H (high) e L (low) - usados para armazenar números maiores
+    
+    Registradores do preocessador Intel 8086 (16 bits)
+    
+        8086
+    |-----------|                           |-----------|
+    |           |                         0 |           |
+    |    AX     |                           |-----------|
+    | | AH|AL | |     Barramento de       1 |           |
+    |           |   endereço (20 bits)      |-----------|
+    |    BX     | --------------------->  2 |           |
+    | | BH|BL | | --------------------->    |-----------|
+    |           |                         3 |           |
+    |    CX     |                           |-----------|
+    | | CH|CL | |      Barramento de        |           |
+    |           |      dados (16 bits)      |-----------|
+    |    DX     | <---------------------    |           |
+    | | DH|DL | | <---------------------    |-----------|
+    |           |                           |           |
+    | |  SP   | |                           |-----------|
+    |           |                           |           |
+    |           |                           |-----------|
+    | |  BP   | |                           |           |
+    |           |                           |-----------|
+    |           |
+    | |  SI   | |
+    |           |
+    |           |                           
+    | |  DI   | |
+    |           |
+    |-----------|
+
+    * SP (stack pointer register) - armazena o endereço do topo
+                                    da pilha de dados
+    * BP (stack base pointer register) - armazena o endereço 
+                                         da base da pilha de dados
+    * SI (Source index register) - usado na manipulação da string
+                                   e vetores
+    * DI (Destination index register) - usado na manipulação de 
+                                        strings e vetores 
+    
+    SP/BP: stack - a pilha de execução dos programas:
+    
+    |-----------| }
+    |           | } HEAP (para variáveis alocadas 
+    |           | } dinamicamente na memória)
+    |           | }
+    |___________| }
+    |           | } <-- SP aponta para cá 
+    |           | } STACK (para uso de memŕias e alocação
+    |           | } de variáveis em funções)
+    |           | } 
+    |___________| } <-- BP aponta para cá
+    |           | } Variáveis globais (estática)
+    |-----------| }
+    
+    Registradores do processador Intel 80286 (32 bits)
+    
+            80286
+    |------------------|                           |-----------|
+    |                  |                         0 |           |
+    |           AX     |                           |-----------|
+EAX | |      | AH|AL | |     Barramento de       1 |           |
+    |                  |   endereço (32 bits)      |-----------|
+    |           BX     | --------------------->  2 |           |
+EBX | |      | BH|BL | | --------------------->    |-----------|
+    |                  |                         3 |           |
+    |           CX     |                           |-----------|
+ECX | |      | CH|CL | |      Barramento de        |           |
+    |                  |      dados (32 bits)      |-----------|
+    |           DX     | <---------------------    |           |
+EDX | |      | DH|DL | | <---------------------    |-----------|
+    |                  |                           |           |
+ESP | |      |  SP   | |                           |-----------|
+    |                  |                           |           |
+    |                  |                           |-----------|
+EBP | |      |  BP   | |                           |           |
+    |                  |                           |-----------|
+    |                  |
+ESI | |      |  SI   | |
+    |                  |
+    |                  |                           
+EDI | |      |  DI   | |
+    |                  |
+    |------------------|
+
+    Registradores dos proc. Intel x86-64 e MAD64 (64 bits)
+    
+                80286
+        |------------------|                           |-----------|
+        |                  |                         0 |           |
+        |                  |                           |-----------|
+    AAX | |      |  EAX  | |     Barramento de       1 |           |
+        |                  |   Andereço (64 bits)      |-----------|
+        |                  | --------------------->  2 |           |
+    ABX | |      |  EBX  | | --------------------->    |-----------|
+        |                  |                         3 |           |
+        |                  |                           |-----------|
+    ACX | |      |  ECX  | |      Barramento de        |           |
+        |                  |      dados (64 bits)      |-----------|
+        |                  | <---------------------    |           |
+    ADX | |      |  EDX  | | <---------------------    |-----------|
+        |                  |                           |           |
+    ASP | |      |  ESP  | |                           |-----------|
+        |                  |                           |           |
+        |                  |                           |-----------|
+    ABP | |      |  EBP  | |                           |           |
+        |                  |                           |-----------|
+        |                  |
+    ASI | |      |  ESI  | |
+        |                  |
+        |                  |                           
+    ADI | |      |  EDI  | |
+        |                  |
+        |------------------|
+
+CICLO DE BUSCA E EXECUÇÃO
+    
+    A CPU executa cada instrução por meio de uma séria de pequenos
+    passos:
+    1. Lẽ a pro
+
+DO CÓDIGO FONTE AO ALTO NÍVEL
+    
+    GCC - Gnu C Compiler
+    
+    * A compilação feita pelo GCC tem vários estágios:
+    
+       Código    Unidade de     Código em      Código     Arquivo
+       fonte      tradução    Ling. Máquina    Objeto    Executável
+       prog.c ---> prog.i ------> prog.s -----> prog.o --> a.out
+                     ^              ^             ^          ^
+                     |              |             |          |
+           Pŕe-proc  |  Compilação  |  Montagem   |  Ligação |
+gcc -E --------------'              |             |          |
+gcc -S -----------------------------'             |          |
+gcc -c -------------------------------------------'          |
+ gcc   ------------------------------------------------------'
+    
+    * Fases do processamento:
+        - Pré-processamento:
+            Troca os DEFINES pelas correspondências e 
+            adiciona os elementos das bibliotecas necessárias
+            para a compilação
+        - Compilação: 
+            Realiza a tradução para código de assembler das intruções
+        - Montagem:
+            Cria, a partir do assembly, o código de máquina (ainda 
+            incompleto, precisando de ligação)
+        - Ligação:
+            Conecta os diferentes códigos-objeto criados para
+            gerar a ligação final

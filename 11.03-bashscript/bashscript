@@ -1,0 +1,200 @@
+-----------------------------------------------------------------------
+SCRIPTS
+
+* São arquivos contendo comandos shell
+* Para que esses arquivos tenham status de novos comandos, eles
+  devem ser executáveis. Pra transformar um 'script' em executável:
+  chmod u+x meu_script
+* Scripts podem ser iniciados por '#!' (shebang)
+* O caracter '#' delimita um comentário
+
+-----------------------------------------------------------------------
+VARIÁVEIS DE AMBIENTE
+
+* Variáveis em bash não têm tipo
+* Elas podem conter números, caracteres e strings
+* Não precisam ser declaradas
+* Para recuperar o valor, usamos o cifrão '$'
+* Não pode haver ' ' (espaços) entre o = e o nome da variável
+* Se forem declaradas com ", uma string pode ser processada em 
+  busca de caracteres especiais
+
+-----------------------------------------------------------------------
+VARIÁVEIS + EXPRESSÕES
+
+A expressão $(comando) executa 'comando' e captura o resultado dele. Ex:
+    $(date +%d%m%Y) - executa o comando 'date' com o formato DD/MM/AAAA
+
+VISIBILIDADE DAS VARIÁVEIS
+Uma variável de ambiente também pode ser definida com o comando 
+'export'. Ex:
+                export PATH=/usr/bin
+    Para fazer uma variável não ser mais exportada, usamos 'unset'
+
+-----------------------------------------------------------------------
+VARIÁVEIS DE AMBIENTE
+* PATH - caminhos para a busca de programas
+* PWD - diretório corrente
+* SHELL - shell padrão
+* CDPATH - diretórios usados como base para o comando 'cd'
+* JAVA_HOME - diretório de instalação do Jaba
+
+-----------------------------------------------------------------------
+COSTRUTURES DE LAÇOS - WHILE
+* Executa os 'comandos conseguintes' entuqaod os 'comandos de teste'
+  possuírem um status de saída ZERO;
+* O status devolvido pelo 'until' é o status de saída do último comando
+  executado dos 'comandos conseguintes' (ou zero, caso nenhum tenha
+  sido executado);
+* FORMATO: 
+  while {comando_de_teste}; do
+    comando_de_execucao
+  done
+    * Executa os 'comandos conseguintes' enquanto os 'comandos de teste'
+      devolverem 0
+  until {comando_de_teste}; do
+    comando_de_execucao
+  done
+    * Executa os 'comandos conseguintes' enquanto os 'comandos de teste'
+      devolverem 1
+
+-----------------------------------------------------------------------
+EXPRESSÕES LÓGICAS:
+    (Necessariamente entre [], com espaço entre eles e as palavras)
+    -a ARQ (arq existe)
+    -a DIR (diretório existe)
+    -z STRING (comprimento de STRING é 0)
+    -n STRING (comprimento de string é != 0)
+    -lt, gt, le, ge, eq, ne (<, >, <=, >=, ==, !=)
+    - != == (compara strings)
+    - EXPR -a EXPR ambas as expressões são verdadeiras
+    - EXPR -o EXPR ao menos uma das expressões é verdadeira
+
+-----------------------------------------------------------------------
+COSTRUTURES DE LAÇOS - FOR
+Percorre elementos de uma lista
+    for {variável} in {lista}; do
+        {comandos_de_execucao}
+    done
+    
+    A LISTA pode ser qualquer listagem existente.
+    Um exemplo é a lista de strings do ls ou uma sequência feita 
+    com seq.
+    Para executar um comando, ou usamos $(ls) ou `ls` (entre crases),
+    uma forma mais compacta de comandos.
+    
+    Usar o comando 'seq' (que gera uma lista de números) para poder
+    adaptar o 'for' para uma implementação parecida com C:
+        
+        for i in $(ls); do
+            echo item: $i
+        done
+
+-----------------------------------------------------------------------
+CONDICIONAIS - if-else-elif
+Faz desvios condicionais. Estrutura:
+    if [ ... ]; then
+        comando
+    elif [ ... ]; then
+        comando
+    else
+        comando
+    fi
+
+-----------------------------------------------------------------------
+CONDICIONAIS - case
+    case $var in 
+        op1 | op2 | op3) comando1;;
+        op4 | op5) comando2;;     ^
+        *) comando default;;      |
+    esac                          |
+    ^-- fecha o bloco             | O segundo ponto-e-vírgula mostra
+                                    que não se devem procurar outras
+                                    opoções para serem executadas.
+                                    (≡ a um break).
+                                    Outras maneiras podem ser:
+                                    ;& - executa, sem testar, o que há
+                                         também na opção abaixo
+                                    ;;& - faz uma busca por matches nas
+                                          opções abaixo da em que houve
+                                          um match
+
+    OBS: comando READ $var - lê da entrada padrão e armazena na 
+         variável
+
+-----------------------------------------------------------------------
+CONDICIONAIS - select
+* Cria um emnu com as entradas passadas para o comando
+* O índice da opção selecionada é armazenada na variável REPLY
+* O 'select' é repetido até que o comando 'break' sera executado
+
+Exemplo:
+    select ARQ in *; do
+        comando1
+        comando2
+        break    
+    done
+
+-----------------------------------------------------------------------
+ARGUMENTOS PASSADOS VIA LINHA DE COMANDO
+* São acessados via parâmetros posicionais
+* $# - número de argumentos passados (sem contar o nome do script)
+* $0 - nome do script
+* $1, $2, $3, ... - parâmetros 1, 2, 3, ...
+
+-----------------------------------------------------------------------
+FUNÇÕES 
+
+* Estrutura para a criação de funções:
+    function nome_da_funcao { meu_codigo }
+* Usa-se 'local' para criar variáveis locais
+* O status de saída é o status do último comando executado nela
+
+    #!/bin/bash
+    HELLO=Hello
+
+    function fhello 
+    {
+        local HELLO=World
+        echo $HELLO
+    }
+    echo $HELLO         # deve mostrar 'Hello'
+    fhello              # chama fhello, que deve mostrar "World"
+    echo $HELLO         # deve mostrar "HEllo" novamente
+
+* Se houver 'export' na variável fora do script, uma modificação 
+  global a modificará.
+
+* Parâmetros passados para funções são tratados de forma semelhante
+  aos parâmetros passados para o script.
+
+    #!/bin/bash
+    
+    function soma
+    {
+        echo $1+$2 = $[$1 + $2]
+    }
+    
+    soma 23 75
+
+-----------------------------------------------------------------------
+Um script mais complexo:
+    #!/bin/bash
+    # renomeia
+
+    STRDE=$1
+    STRPARA=$2
+    for i in $(ls *$STRDE* ); do
+        ORIGEM=$i
+        DESTINO=$(echo $i | sed -e "s/$STRDE/$STRPARA/")
+        mv $ORIGEM $DESTINO
+    done
+
+-----------------------------------------------------------------------
+O USO DO './' NUM SCRIPT DO DIRETÓRIO CORRENTE
+
+* Para executar um script 'meu_script' que se encontra fora do $PATH,
+  usamos o ./ como garantia de segurança para que a pessoa esteja cons-
+  ciente de que ela está executando aquele comando.
+* O operado '.' é equivalente ao comando 'source', que faz com que 
+  carreguemos os comandos no shell corrente.

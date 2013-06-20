@@ -1,0 +1,74 @@
+CLASSIFICAÇÕES
+
+-----------------------------------------------------------------------
+TEXTO X BINÁRIO;
+
+* Arquivo texto: estruturado como uma sequência de linhas de texto. 
+                 De forma geral, podem conter apenas caracteres 'im-
+                 primíveis', tabulações horizontais e quebras de linha.
+* Arquivo Binário: podem conter qualquer tipo de dados, codificados em 
+                   formato binário, para propósitos de armazensamento
+                   ou preocessamento computacional. Frequentemente, con-
+                   têm bytes que não devem ser interpretados como carac-
+                   teres texto
+
+* Caracteres de quebra de linha: 
+    Carriage return (CR - \r) [ASCII 12] e Line Feed (LF - \n) [ASCII 10]
+    * Windows: CR+LF
+    * Unix:    LF
+    * Mac:     CR
+
+
+-----------------------------------------------------------------------
+DADOS X EXECUTÁVEL
+
+* Arquivo de Dados - contêm informações que são entrada ou saída de
+                     programas de computadores.
+* Arquivo executável - contêm código ou instruções a serem executadas.
+
+-----------------------------------------------------------------------
+ARQUIVOS DE DISPOSITIVOS
+
+O Unix e seus derivados são sistemas orientados a arquivos:
+* Os dispositivos periféricos também são tratados como um tipo 
+  especial de arquivo
+
+* Esses arquivos especiais possibilitam que programasinterajam com 
+  qualquer dispositivo por meio de chamadas ao sistema padronizadas
+  para operações de E/S
+
+* Exemplos de arquivos de dispositivo de E/S:
+  * impressora: /dev/lp0
+  * console: /dev/console
+  * hard disk: /dev/sd[x] ou /dev/hd[x]...
+  * cdrom: /dev/cdrom
+  * /dev/null [não está associado a um dispositivo físico]
+
+* Arquicos de dispositivos podem ser de três tipos: 
+  * de caracter: fazem entrada/saída um caracter por vez,
+                 fazendo um fluxo de dados
+  * de bloco: fazem grande tráfico de dados e caracteres, sendo
+              mais preparados para isso. Esses dados são pas-
+              sados em bloco, e não um por vez (blocos de dados)
+  * pseudo-dispositivo: não são um dispositivo real (físico), mas 
+                        funcionam como se fossem um e realizam al-
+                        guma ação útil para o computador (como o 
+                        /dev/null, que é um 'sumidouro' de dados
+                        (como saída) ou uma entrada vazia (quan-
+                        do passado como entrada);
+    
+    Ao listar arquivos, a primeira opção, ao lado das permissões,
+    mostra o tipo de arquivo:
+    * '-': arquivos normais
+    * 'd': diretórios
+    * 'c': dispositivos do tipo caracter
+    * 'b': dispositidos do tipo bloco
+    Os pseudo-dispositivos podem aparecer como 'c' ou 'b'.
+
+* O EOF (fim de arquivo) não é um código real. Ele é padronizado pelas
+  bibliotecas do C que detectam, a partir do controle do SO, que o ar-
+  quivo acabou (no disco, o sistema operacional detecta que o arquivo
+  acabou por causa do número de bytes dele).
+
+* Podemos usar o comando de concatenação 'cat' para realizar diversas
+  ações conforme o caso. 

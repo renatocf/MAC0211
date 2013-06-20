@@ -1,0 +1,67 @@
+DIFERENTES VISÕES DA MEMÓRIA
+
+* Endereçamento linear (ou plano)
+- A memória é vista como um vetor de bytes.
+- Um único óndice (endereçi) seleciona algum byte específico
+  do vetor.
+
+* Endereçamento segmentado
+- Usado pela família 80x86
+- A memória é vista como um vetor de bytes BIDIMENSIONAL
+- Dois componentes são necessários para especificar um byte na 
+  memória: um valor de SEGMENTO e um DESLOCAMENTO (offset) den-
+  tro do segmentoea.
+    
+    --> deslocamento (offset)
+                | | | | | | | | | | | | | | | ... | | | | | | |
+segmento    ||  | | | | | | | | | | | | | | | ... | | | | | | |
+            ||  | | | | | | | | | | | | | | | ... | | | | | | |
+            ||  | | | | | | | | | | | | | | | ... | | | | | | |
+            \/  | | | | | | | | | | | | | | | ... | | | | | | |
+                | | | | | | | | | | | | | | | ... | | | | | | |
+                | | | | | | | | | | | | | | | ... | | | | | | |
+                | | | | | | | | | | | | | | | ... | | | | | | |
+
+Memória segmentada (família 80x86)
+- Vantagem da segmentação: aumento da capacidade de endereça-
+  mento do procesador.
+- Nos processadores do 8086 até o 80286: cada segmento contém
+  no máximo 64K (2^16) bytes, ou seja, os descolamentos são nú-
+  meros de até 16 bits.
+- Nos processadores a partir do 80386: cada segumento contém
+  no máximo 4GB (2^32) bytes, ou seja, os deslocamentos são nú-
+  mero de até 32 bits.
+- Em toda família 80x86: o endereço de um segmento ocupa 16 
+  bits, ou seja, temos no máximo 65536 segmentos diferentes.
+    
+    Os segmentos surgiram por causa da compatibilidade do 8086
+    para o 80286. Os segmentos foram criados para manter o con-
+    ceito de segmentos de 16 bits (que ainda têm 16 bits) e, no
+    lugar, os deslocamentos podem ser aumentados o quanto se de-
+    sejar. A partir da família 80286, os segmentos ficaram mui-
+    to grandes (2^64 - 4 Gb). Isso diminuiu seu uso, porque di-
+    ficilmente os programas são tão grandes.
+
+Registradores de segmento (família Intel 80x86)
+- todos os registradores de segmento na arquitetura de 32 bits
+  têm 16 bits:
+  * CS: aponta para o segmento de código
+  * DS: aponta para o segumento de dados
+  * SS> aponta para o sefumento da pilha
+  * ES, FS, GS: registradores de segmento extras, para manipular
+                registradores de segmento ou apontar para outro
+                lugar de interesse do programador.
+    
+    Os processadores da família Intel 80x86 tem essa característica.
+    Porém, os processadores de 64 bits não funcionam desta maneira.
+    Na realidade, temos que eles mantêm estes registradores, mas 
+    sempre os usam com valores constantes.
+
+- Embora s processadores da família 80x86 usem memória segmentada,
+  a memória real (física) conectada a UCP continua sendo um vetor
+  de bytes.
+- O processador converte o valor de um segmento em um endereço fí-
+  sico de memoria (por meio de uma função consultando a tabela - 
+  inacessível para o programador). Depois, o processador adiciona 
+  a este endereço o valor do deslocamento para obter o endereço de
+  um dado real da memória.

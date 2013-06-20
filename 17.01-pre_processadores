@@ -1,0 +1,76 @@
+PRÉ-PROCESSADORES
+
+* Sãa programas que processam seus dados de entrada 
+  que serão usadospor compiladores. Alguns, porém, 
+  podem realizar modificações.
+
+PRÉ-PROCESSADOR LÉXICO
+* É o tipo de pré-processador de mais baixo nível 
+  (que é executado antes de qualquer outro proces-
+  samento no código)
+* Faz uma análise léxica do código fonte
+* Ações comuns: 
+  - Substituição de cadeias de caracteres de acordo
+    com regras (macros) definidas.
+* O primeiro estágio da compilação é o pré-processa-
+  mento, realizada com o CPP.
+
+    prog.c --> prog.i --> prog.s --> prog.o --> a.out
+            |          |          |          |
+        pré-proces-  compi-    montagem   ligação
+          samento    lação 
+
+MACRO (= MACROINSTRUÇÃO)
+* É um ocnjunto de instruções que podem ser reutili-
+  zadas em diferentes contextos
+* Pode ser parametrizável
+* Podem aparecer em vários programas: editores de 
+  texto, planilhas, interpretadores e compiladores
+
+CPP (C PRE-PROCESSOR)
+* É um processador de macroes (que permite que 
+  macros seham definidas nos programas)
+* Usado em arquivos C, C++ e Objective-C
+* Diretivas:
+    - #include (copia o conteúdo de um outro arquivo
+                no arquivo corrente)
+    - #define  (define matros)
+    - #ifndef, #endif
+* Em C, macros podem ser usadas como substitutas para
+  funções que implementam uma computação curta e que 
+  será executada frequentemente
+  * Isso é uma tendência de programadores mais velhos;
+  * Evita o custo adicional de chamadas de funções;
+  * É mais difícil de fazer debuggs;
+  * PROBLEMAS:
+    - Preocupação com a substituição textual
+    
+    #define QUADRADO(X) X*X
+    ...
+    c = QUADRADO(a+b);
+    c = 1/QUADRADO(a);
+    ...
+    
+    Problema: a macro fará a+b*a+b e 1/a*a
+    Para evitarmos, o ideal é utilizar o máximo
+    de parênteses possíveis:
+    
+    #define QUADRADO(X) ((X)*(X))
+    ...
+    c = QUADRADO(a+b); /* ((a+b)*(a+b)) */
+    c = 1/QUADRADO(a); /* c = 1/((a)*(a))
+    ...
+    
+    Há ainda um erro mais sutil:
+    
+    #define QUADRADO(X) ((X)*(X))
+    ...
+    QUADRADO(c = atoi(getchar()));
+    ...
+    
+    que pegará o getchar DUAS VEZES e 
+    testará caracteres diferentes. Ex:
+    Ao ler 12345 ele executará 1*2, 
+    pois ele executa a chamada várias
+    vezes. Isso também pode tornar o
+    programa MAIS LENTO.

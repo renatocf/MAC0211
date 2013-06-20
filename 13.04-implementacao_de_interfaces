@@ -1,0 +1,80 @@
+GERENCIAMENTO DE RECURSOS
+
+* É um dos problemas mais difíceis de se lidar no projeto de interfaces
+* Se refere a: como gerenciar recursos que são de propriedade da biblio-
+  teca ou que são compartilhadas pela biblioteca com aqueles que vão
+  chamá-la?
+* Exemplos de recursos: MEMÓRIA, ARQUIVOS, ESTADO DE VARIÁVEIS
+* Problemas: inicialização,manutnção do estado, compartilhamento e
+             cópia, limpeza.
+
+    Exemplo: arquivos CSV (para representar tabelas)
+    
+    |  NUSP  | aluno | ano  | nota |
+    | 135785 | Pedro | 2010 | 7.5  |
+    | 137921 |  Ana  | 2011 | 8.0  |
+    
+    135785,"Pedro",2010
+    137921,"Ana",2011,8.0
+    
+    CSV: comma separator values 
+    (apesar dele aceitar vários tipos de separadores)
+    
+    Muitos programas usam arquivos do tipo CSV. Ao considerarmos uma
+    interface para manipulação destas tableas, temos um problemas não
+    trivial. Uma das principais questões é o que se refere a ser fei-
+    ta com a criação de uma string que separe os campos e permita que
+    eles sejam usados.
+    
+    --> A liberação de um recurso deve ser feita na mesma camada em 
+        que ele foi alocado
+        * O estado da alocação de um recurso não deve ser alterado
+          em toda a interface;
+        * Ex1: se uma função de interface receve como entrada um 
+               arquivo aberto, então ela deve deixá-lo aberto quan-
+               do for encerrada.
+        * Os construtures e destrututores (POO) auxiliam na implan-
+          tação dessa regra.
+        * Ex2: gerenciamento de memória com 'garbage collector' 
+               (coleta automática de 'lixo'). 
+        
+        Tanto Java quanto C++ têm o conceito de Construturo
+        C++ tem disponível os destrutores que desalocam a memória.
+        Java, por outro lado, não tem destrutures, mas usa o 'gar-
+        bage collector' para liberar a memória. Ainda assim, é in-
+        teressante se o próprio implementador deixar seus recursos.
+    
+    --> Tratamento de erros
+        O que fazer na ocorrência de um erro irrecuperável?
+        * Em muitos casos, mostrar uma mensagem contendo detalhes
+          sobre o erro ocorrido e sair do programa já é um trata-
+          mento apropriado;
+        * Em outros casos, a melhor abordagem é apenas assinalar o
+          erro e dar uma chance ao chamador de serecuperar;
+        * Em alguns casos, nem mesmo mostrar uma mensagem é possí-
+          vel, porque a vivlioteca pode estarsendo executada em um
+          ambiente em que a mensagem interferirira nos dados mos-
+          trados pelo chamador. Nesse caso, a melhor alternativa é
+          registrar a mensagem de erro em um arquivo de 'log'.
+                
+            LOG: arquivo com dados sobre a execução do programa.
+    
+        Detectar erros num nível baixo; lidar com eles num nível alto
+        * Ideia geral: o chamador é quem deve determinar a frma como
+          o erro deve er tratado.
+        * As rotinas da biblioteca precisam colaborar com essa ideia: 
+          em casos de erro, devem falhar de forma 'graciosa', ou seja,
+          não abortando o código e retornando com o maior número de 
+          informações possíveis.
+        
+        Usar exceções somente nas dituações excepcionais
+            Algumas linguagens (como Java) possuem o conceito
+            de exceções para capturar situações não ususais e se
+            recuperar delas. Elas permitem que um fluxo de controle
+            alternativo seja executado quando algo errado aconteça.
+        Dicas:
+            * Exceções não deve ser usadas para tratar valores de
+              retorno esperados (como o EOF na leitura de um arquivo);
+            * Como elas distorcem o fluxo de controle, exceções podem
+              conduzir a construções confusas e mais susceptíveis a 
+              erros.

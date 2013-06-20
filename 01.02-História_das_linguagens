@@ -1,0 +1,31 @@
+EVOLUÇÃO DE LINGUAGENS DE PROGRAMAÇÃO
+
+Primórdios das linguagensde programação em alto nível
+
+* 1957 - FORTRAN (FORmula TRANslating): eficaz para manipulação de 
+         números
+* 1958 - ALGOL 58 (ALGOtith Language): primeira linguagem estruturada;
+         deu origem à maioria das linguagens modermas;
+* 1958 - LISP (LISt Processing): projetada para uso em inteligência
+         artificial;
+* 1959 - COBOL (COmmom Business Oriened Language): eficaz para a mani-
+         pulação de entrada/saída de dados (usada principalmente para
+         manipular dados comerciais, em máquinas como mainframes);
+* 1964 - BASIC (Begginners All-purpose Symbolic Instruction Code);
+* 1967 - Simula 67: incluia todos os conceitos fundamentais da orien-
+         tação a objeto;
+* 1970 - PASCAL: linguagem para o ensino; combina o melhor de FORTRAN,
+         COBOL e ALGOL (refinou noções como ponteiros);
+* 1970 - PROLOG (PROgrammation en LOGique): linguagem para programação
+         lógica;
+* 1972 - C: uma das linguagens mais usadas até hoje (menos verboso que
+         que o PASCAL, popularizada junto ao desenvolvimento do Unix,
+         usada largamente na ciração de SO's pela simplicidade de alto
+         poder de manipulação I/O);
+* 1980 - Smaltalk: deu força à orientação a objetos, reunindo melhor
+         de LISP, Simula 67 e Logo (popularizou a POO);
+* 1983 - C++ e Objective-C: extensão de C para OO;
+* 1987 - PERL (Practical Exrtacting and Report Language): linguagem 
+         baseada em scripts;
+* 1995 - Java: lançada como "a linguagem para a Internet";
+* 2000 - C#: mistura de C++ e Java criado pela Microsoft

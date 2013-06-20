@@ -1,0 +1,8 @@
+Formato padrão de uso para as expressões regulares AWK:
+    
+AWK
+    BEGIN    { ... }
+    /regex1/ { ... }
+    /regex2/ { ... }
+          ...
+    END      { ... }

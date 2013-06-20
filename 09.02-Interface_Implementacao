@@ -1,0 +1,20 @@
+BIBLIOTECA
+* É uma coleção de implementações de comportamentos que possui uma
+* interface bem definida, por meio da qual um comportamento é invodado.
+
+INTERFACE
+* Expressa o quê a biblioteca faz
+
+IMPLEMENTAÇÃO
+* Expressa COMO a biblioteca fa o que está definido em sua interface
+
+CARACTERÍSTICAS
+* Promovem o reuso de comportamentos
+* São organizadas de forma que possam ser usadas pro programas
+  diferentes (e independentes)
+* Os comportamentos implementados nelas odem ser integrados (= ligados)
+  aos do programa invocador em diferentes momentos do ciclo de vida do
+  programa
+    - na geração do executável
+    - na invocação da execução do programa
+    - durante a execução do programa

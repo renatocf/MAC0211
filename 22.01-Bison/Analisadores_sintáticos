@@ -1,0 +1,141 @@
+GERADORES DE ANALISADORES SINTÁTICOS
+
+* O UNIX original tinha como um de seus componentes o YACC -
+  Yet Another Compiler Compiler
+* O YACC gera um 'analisador sintático' (= parser) a partir
+  de uma especificação formal de uma gramática.
+* O GNU Bison é a implementação da FSF (Free Software Foundation)
+  para a YACC e é completamente compatível, mas com mais funciona-
+  lidades.
+
+GNU Bison
+
+* O Bison recebe como entrada a especificação de uma gramática
+  no formato BNF (Backus-Naur Form)
+* Ao definirmos a gramática formal para uma linguagem, cada 
+  tipo de unidade sintática ou agrupamento é associado a um simbolo.
+* Temos ds tipos de símbolos:
+    Não-terminais: agrupamentos de símbolos menores
+    Terminais: símbolos que não podem ser subdivididos (= tokens)
+    
+    Ex em C:
+    * Não-terminais: expressão, sentença (statement), declaração,
+      definição de função
+    * Terminais: & , . 0 'a' while for (palavras reservadas)
+
+    Ex na calculadora da aula 16:
+    <programa> ::= <programa> <exp> ; | <exp>;
+    <expr> ::= <exp> + <termo> | <exp> - <termo> | <termo>
+    <termo> ::= <termo> * <fator> | <termo> / <fator> | <fator>
+    <fator> ::= NUMERO | -<fator> | (<expr>) |
+                K[<expr>] | K[<expr>] := <expr>
+    
+    '+', '*', '/', '-', 'NUMERO' são símbolos terminais em nossa
+            gramática.
+
+ESTRUTURA DA AQUIVO
+
+É análoga à entrada do Flex:
+
+    %{
+        Prólogo
+        (código a ser colocado no início)
+    %}
+    Declarações do Bison
+    %%
+    Regras gramaticais 
+    %%
+    Epílogo
+    (código a ser colocado no arquivo)
+
+* Prólogo> definições em C
+* Declarações do Bison: onde são definidos símbolos terminais
+                        e não terminais, relações de precedência.
+* Regras gramaticais: relações a serem feitas.
+
+DESCRIÇÃO DE GRAMÁTICA NO BISON - Símbolos
+* Um símbolo não-terminal é representado por um identificador (como
+  um identificador na linguagem C). Por convenção, usam-se somente
+  letras minúsculas, como ''expressao', 'comando', 'declaracao'
+* Um símbolo terminal(tolken) pode sere presesentado por:
+    * Um identificador, com letras maiúsculas, para diferencias
+      das expressões: INTEIRO, RETURN
+    * um caracter literal, como uma constante em C ('+', '-', '*', '/')
+      (com aspas simples)
+    * uma string literal, como "<=" ou ">=" (com aspas duplas)
+
+* Formato da regra:
+        resultado: componentes...;
+    onde resultado é um não-terminal.
+    Ex:
+        exp: exp '+' exp;
+    Essa regra é recursiva, e sozinha ela não faz sentido.
+        Podemos definir mais regras que envolvam 'exp'
+* Múltiplas regras para um mesmo resultado podem ser escritas
+  separadamente ou podem ser unidas por meio do caracter como
+  mostrado a sequir:
+    
+    resultado:
+        componentes-da-regra1...
+      | componentes-da-regra2...
+      ...
+      ;
+    
+    Ex:
+        exp: exp + exp | NUMERO
+    ou:
+        exp: NUMERO;
+        exp: exp + exp;
+
+VALOR SEMÂNTICO
+* Para ser útil, um programa qtem que fazer algo mais do que 
+  simplesmente analisar a sintxe e entrada, ele tem que gerar
+  alguma saída.
+* Para gerar a saída, ele precisa definir a semântica (signi-
+  ficado) daquilo que está processando.
+* No caso de um compilador, é saída é um programa numa outra
+  linguagem (p. ex, linguagem de montagem)
+
+SÍMBOLOS - TIPO E VALOR SEMÃNTICO
+* Cada token reconhecido em um arquivo de entrada, para um
+  'parser', além e ter um tipo (um símbolo não-terminal) tem
+  um valor semântico associado a ele.
+* Por exemplo, a expressão 1+2 possui 2 tokens de um mesmo
+  tipo (inteiro ou número), mas que possuem valores semânticos
+  diferentes.
+* Mesmo símbolos não-terminais podem ter semânticas diferentes
+  (1 + 2 + 4 são expressões como 1, mas são diferentes)
+* Em um arquivo de entrada para o bison, CADA REGRA PODE SER
+  SEGUIDA DE UMA AÇÕA QUE DEFINE O QUE DEVE SER FEITO AO D
+  DETECTAR A REGRA.
+    Ex:
+                        ,-- valor correspondente ao valor
+                        |   semântico da expressão
+        expr '+' expr { $$ = $1 + $3; }
+                             ^^--^^-- tolkens/expressões
+                                      na ordem mostrada
+    define que o valor semântico de expr quando essa regra é
+    detectada é a soma das duas sub-expressões.
+* Os tipos de valores semânticos são definidos nas seção de 
+  'Dleclarações do Vison' na primeira parte do arquivo de 
+  entrada para o Bison.
+
+REGRAS E SUAS AÇÕES
+* Uma AÇÃO é cum código em C delimitada por {}
+* Uma ação pode ser colocada em qualquer posição da regra. 
+  A maioria das regras possuem apenas uma única ação, posi-
+  cionada no final da regra (depois de seus componentes).
+* Ass ações no meio da regra são muito complicadas, e de-
+  vem ser evitadas e só usadas em contextos especiais.
+* Quando uma ação não é definida para uma regra, o Bison
+  fornece a ação padrão $$ = $1
+
+COMO CRIAR UM ANALISADOR SINTÁTICO 
+* Especidique a gramática em um arquivo .y e, para cada
+  regra gramatical, descreva a ação a ser tomada quando uma
+  instância daquele regra é detectada.
+* Escreva um analisador léxico para fornecer os itens léxicos
+  (tokens) para o Bison (pode ser manualmente via Flex)
+* Escreva uma função (ex, main) para chamar a função 'yyparse'
+  gerada pelo Bison.
+* Escreva, opcionalmente, funções de relatos de erros.

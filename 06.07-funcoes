@@ -1,0 +1,25 @@
+CONSIDERAÇÕES:
+
+* São implementadas como sub-rtinas (com CALL e RET)
+* A passagem de parâmetros é feita via pilha
+* A pilha também é usada para armazenar as variaveis locais
+  da função.
+* O valor de retorno da função pode ser devolvido na pilha ou
+  em EAX
+
+RESPONSABILIDADE DA FUNÇÃO CHAMADA:
+* Salvar BPdo chamador
+* Salvar todos os registradores s serem afetados
+* Alocar espeço para variáveis locais
+* Realizar trabalho usando argumentos e var. locais
+* Setar valor de retorno (em espaço próprio ou em EAX)
+  O EAX funciona geralmente como um padrão (chamadas de sistema
+  costumam usá-lo para isso)
+* Desalocar o espaço das variáveis locais
+* Restaurar regitradores afetados
+* Restaurar BP
+* Retornar
+
+IMPLEMENTAÇÃO DE FUNÇÕES
+Ex: int FUNC(int A, int B, int C)
+    que tem como saída (A²+B²)/C²

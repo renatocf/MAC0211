@@ -1,0 +1,46 @@
+SISTEMAS DE NUMERAÇÃO
+
+* Sistema binário:
+    Usa dois dígitos (0, 1)
+    Estrutura dos pesos dos números binários:
+    2³2²2¹1,2-¹2-²2-³
+    
+* COnversão decimal/binário:
+    Método da divisão (parte inteira)
+    Método da multiplicação (método de produto)
+    0,3125 * 2 = 0, 625 --> mais significativo
+    0,625  * 2 = 1, 25
+    0,25   * 2 = 0, 5
+    0,5    * 2 = 1,0    --> menos significativo
+    (0,3125)_10 == (0,0101)_2
+    
+    Ex: 0,375: 0,375 * 2 = 0, 75 
+               0,75  * 2 = 1, 5  
+    (0,375)_10 = (0,01)_2
+
+* Aritmética binária:
+    SOMA
+    0 + 0 = 0
+    1 + 0 = 1
+    0 + 1 = 1
+    1 + 1 = 10
+    
+    SUBTRAÇãO
+    0  - 0 = 0
+    1  - 0 = 1
+    1  - 1 = 0
+    10 - 1 = 1
+    
+    EXEMPLO: (1010101010101110)_2
+             parte 1      parte 2
+              8 bits      8 bits
+            (10101010)   (10101110)
+           ------------ ------------
+              170_10       174_10
+
+    Logo, temos que (1010101010101110)_2 = (170*2^8 + 174)
+    Isso ocorre porque, cada vez que avançamos uma casa, multipli-
+    camos o número por 2: essa operação se chama SHIFT. Como, no
+    caso acima, estamos dando shift 8 vezes na 1ª parte, multipli-
+    camos por 2 8 vezes. Logo, temos a parte1^8 + parte2
+

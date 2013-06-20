@@ -1,0 +1,168 @@
+AWK
+
+O 'awk' é uma ferramenta que contêm uma linguagem de programação
+própria que permite que usemos scripts para realizar expressões
+regulares mais longas
+
+Formato mais simples:
+    awk <padrão de busca> <opções do programa> 'arquivo de entrada'
+
+Forma mais geral:
+    awj [-F<sc>] 'prog' | -f <arg_prog> [<vars> [-|<arq_entrada>]
+    
+             sc separador de camo
+           prog programa em Awk (na linha)
+       arq_prog arquivo de stript de Awk
+           vars inicialização de variáveis
+              - lê da entrada padrão
+    arq_entrada arquivo a ser processado
+
+    Formato de um programa:
+    BEGIN
+    { comandos de teste... }
+    { comandos de teste... }
+    { comandos de teste... }
+    ...
+    END
+    
+Formato do programa:
+
+ENTRADAS
+* Lê um script e o aplica na sua entrada.
+* O script pode ser passado como parâmetro entre '' ou pela opção
+  -f 'nome_do_script'
+* A entrada é quebrada em registros (normalmente, linhas)
+* Os registros são quebrados em campos (normalmente, nos espaços 
+  em branco) que podem ser referenciados por meio das variáveis 
+  posicionais $1, $2, ..., $n (mas podemos usar vários tipos de
+  caracteres como campos).
+* $0 se regere ao registro inteiro
+* NR é uma variável 'embutida' que contém o número de registros
+  já processados
+* NF é a variável que contêm o número de campos do registro atual
+* 'length' é a variável que contém o número de caracteres da linha
+  atual
+* Para definit um outro separador de campos, basta usar a opção 
+  -F no 'awk' para determinar o separador.
+
+EXPRESSÕES REGULARES DO AWK
+
+^      começo da string
+$      fim da string
+\      metacaracter de scape para remover o significado dos 
+       metacaracteres
+.      qualquer caracter, inclusive newline
+[xyz]  qualquer caractere do conjunto
+[^xyz] qualquer caractere que não esteja no conjunto
+|      alternativas
+*      0 ou mais vezes a expressão anterior
++      1 ou mais vezes a expressão anterior
+BEGIN  começo do arquivo
+END    final do arquivo
+
+EXEMPLOS SIMPLES
+
+* Move todos os arquivos cujo nome inicia com 'junk' para
+  o diretório "lixo", renomeando-os com uma extensão .lix
+  ls junk* | awk '{print "mv "$0" ../lixo/"$0".lix"}' | bash
+
+* Soma de média:
+    BEGIN { s = 0 } 
+          { s += 1 }
+    END   { print "Soma: ", s, "Media: ", s/NR }
+    
+    Podemos usar BEGIN para inicializações (inclusive com 0), mas
+    isto é, em geral, desnecessário, pois o AWK faz isso sozinho.
+    
+VETORES - EXEMPLOS
+* Contador de ocorrências de palavras:
+    # Como não tem nada, está representando que devemos
+    # fazer a expressão para todas as linhas.
+        {
+           for(i = 1; i <= NF; i++)
+                freq[$i]++
+        }
+    END {
+            for(palavra infreq)
+                printf %s\t%d\n, palavra, freq[palavra]
+        }
+* Ordena um arquivo considerando como chave os valores numéricos
+  armazenados no primeiro campo
+        {
+            if{$1 > max) 
+            max = $1
+            vet[$1] = $0
+        }
+    END {
+            for(x = 1; x <= max; x++)
+                if(n in vet)
+                    print vet[x]
+        }
+    # Temos print e printf para a impressão. Print é como o 
+    # 'puts' do C, enquanto o printf é análogo ao do C.
+    
+    # Podemos escrever 'print $0' ou 'print' sem ele, pois o 
+    # default, nesse caso, será usar o $0
+
+BUSCA DE PADRÕES
+* Imprime todas as linhas que começam como uma vogal:
+    awk '/^[AEIOUaeiou]/' # A ação padrão é imprimir
+* Imprime as linhas cuja segunda palavra é maior (numerica ou
+  lexicograficamente) do que a primeira. A comparação será nu-
+  mérica se ambas palavras tiverem representação numérica:
+    awk '$2 < $1'
+* Resultados de jogos onde o primeiro time venceu (o nome do time não
+  pode ter espaços:
+    awk '/^[a-zA-Z]+ +[0-9]+ +x +[0-9]+ +[a-zA-Z]+/ && $2 > $4'
+* Linhas começando com dígitos ou com o 2º campo maior do que o 3º
+    awk '/^[0-9]/ || $2 > $3'
+
+* O operador '~' é chamado de 'match' e diz se uma expressão casa com
+  um determinado padrão especificado através de uma expresãp regular.
+* Os operadores ~ e !~ podem ser usados como nos exemplos abaixo ou
+  dentro de comandos 'if', 'while' e 'for'
+* Ex:
+    awk '$1 ~ /Janeiro/'
+    awk '$1 !~ /Janeiro/'
+    
+UM EXEPLO MAIS COMPLETO
+* Entrada: arquivo coins.txt, contendo a descrição de uma coleção 
+           de moedas
+* Formator do arquico de entrada: 5 colunas
+    metal | peso | ano da cunhagem | país de origem | nome
+* Ex:
+    gold    1   1986    USA     American Eagle
+* Saída desejada:
+    Dados sumarizados da coleção de moedas
+
+* Lista todas as moedas de ouro:
+    (Todos são equivalentes)
+    awk '/gold/' coins.txt
+    awk '/gold/ {print}' coins.txt
+    awk '/gold/ {print $0}' coins.txt
+
+* Lista nomes de todas as moedas de prata
+    # Mesmo se a variável não tiver valor, não dará erro.
+    # Procura a palavra (ou subpalavra) silver dentro de
+    # todo o trecho;
+    # A vírgula pode ser usada para por ESPAÇOS entre as
+    # strings.
+    
+    awk '/silver/ {print $5,$6,$7,$8}' coins.txt
+    
+    # Para evitarmos os problemas de espaços, poderíamos
+    # usar outro caractere como separador de campos (; ou
+    # mesmo um <tab>). Nesse caso, poderíamos passar a 
+    # opção -F que definiria este caractere.
+    
+OUTRAS FUNCIONALIDADES
+* /(<string1>)|(<string2>)/    - define padrões de busca alternativas
+* /<string1>/,/<string2>/      - define uma FAIXA DE LINHAS, delimitadas
+                                 por duas strings
+* == != < > <= >=              - operadores que podem ser usados na de-
+                                 finição de condições
+* & (AND) e || (OR)            - operadores que conectam duas condições
+* + - * / % ++ --              - operadores aritméticos
+* sqrt, log, exp, int          - funções aritméticas
+* length, substr, split, index - funções para strings
+* while, if, for               - estruturas de controle de fluxo

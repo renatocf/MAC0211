@@ -1,0 +1,44 @@
+ORGANIZAÇÃO DA MEMÓRIA DE UM COMPUTADOR
+
+    UCP         Unidade central de processamento
+|---------|     
+| | Reg | |     Registradores
+|         |     
+| | ULA | |     Unidade de processamento lógico/aritmético
+|         |     
+|  | UC | |     Unidade de controle (controlador) 
+|---------|     
+
+0 | | | | | | | | | <- palavra
+1 |               | 1 } <- endereços
+2 |               | 2 }
+         ...         
+n |               | n } <- último endereço depende do tamanho 
+                           da memória 
+    UCP                         
+|---------|   barramento de     
+| | Reg | |      endereço       0 | | | | | | | | |
+|         | <---------------->  1 |               |
+| | ULA | |                     2 |               |
+|         | <---------------->           ...       
+|  | UC | |   barramento de     n |               |
+|---------|      memória        
+
+    O barramento de endereço transfere endereços, enquanto o de 
+    memória, os dados. O tamanho do barramento é um dos parâmetros
+    que define o computador.
+
+* A memória é organizada em retângulos de bits, chamadas de "palavras".
+  Na arquitetura da Intel, temos sempre palavras de 8 bits
+* Cada palavra tem um ENDEREÇO, que são numerações lineares
+* bit vem do nome "binary"
+* o "byte" é chamado como 2^8, o nome padrão para as palavras (o ta-
+  manho mais comum delas é este, e é o básico que o computador pro-
+  cessa).
+
+PREFIXOS: 
+kilo - 10^3 (K)    kibi - 2^10 (Ki)
+mega - 10^6 (M)    mebi - 2^20 (Mi)
+giga - 10^9 (G)    gibi - 2^30 (Ki)
+             ^-- Costuma-se usar um abuso de notação, nestes casos.
+

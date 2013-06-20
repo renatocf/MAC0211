@@ -1,0 +1,24 @@
+LINGUEGEM DE MONTAGEM (Assembly)
+
+Porque usar:
+
+* Para aprender como uma dada CPU funciona;
+* Para ter o controle total do seu código;
+* Para melhorar o desempenho de partes do programa, quando o
+  tempo de execução é uma preocupação crítica;
+* Para escrever um novo SO ou portar um já existente para 
+  uma nova máquina (há partes do código que precisam ser 
+  escritas em linguagem de montagem);
+* Para obter acesso a modos de programação não ussuais do seu 
+  processador (ex: modo 16-bits, firmware, etc.);
+* Para otimizar manualmente códigos gerados por um compilador não
+  muito bom;
+* Para produzir códigos otimizados para uma determinada confi-
+  guração de hardware.
+
+Proque não usar:
+* Código longo (entediante);
+* Código muito susceptível a erros; os erros são difíceis de 
+  serem localizados;
+* Código de difícil manutenção;
+* O resultado não é portável para outras máquinas

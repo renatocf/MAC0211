@@ -1,0 +1,51 @@
+GERADORES DE ANALISADORES LÉXICOS
+    * para C: Lex, Flex;
+    * para Java: JFlex;
+GERADORES DE ANALISADORES SINTÁTICOS
+    * para C: Yacc, Bison;
+    * para Java: JacaCC, ANTLR
+
+FLEX - Fast Lexical Analyzer Generator
+
+* Entrada: tabela de expressões regulares e suas respectivas ações
+  associadas.
+* Saída: código em C que gera um analisador léxico.
+
+* ENTRADA:
+    [Definições]
+    %% - Separadores de seções
+    [Regras]
+    %%
+    [Código do Usuário] - opcional
+
+* SEÇÃO DE DEFINIÇÃO
+    Pode conter:
+    - código 'literal' que deve aparecer no analisador de fora de
+      qualquer função. Esse código deve ser delimitado por %{ %} 
+      ou então deve aparecer identado (a primeira opção é mais 
+      garantida);
+    - declarações de DEFINIÇÕES DE NOMES SIMPLES
+      [nome] [definição]
+      Ex:
+      DIGITO         [0-9]
+      IDENTIFICADOR  [a-zA-Z][a-zA-Z0-9]*
+* SEÇÃO CÓDIGO DO USUÁRIO
+    - Nesta seção podemos colocar a função main() que desejemos
+      (para já termos um programa completo com o código).
+    - Todo o código que é colocado nessa seção, juntamente com o 
+      que é colocado entre %{ %} estará no .c
+* SEÇÃO DE REGRAS
+    - A seção de REGRAS contém um conjunto de regras que definem
+      os tipos léxicos que serão entendodos pelo analisador. O 
+      Flex usa essas regras para gerar o código do analisador.
+      Os tipos léxicos são as CLASSIFICAÇÔES DOS TOLKENS.
+    - Uma regra é um par [padrão - ação]
+    - Um padrão é definido por meio de uma expressão regular.
+    - Uma açõa é um trecho de código em C.
+
+VARIÁVEIS PRÉ-DEFINIDAS
+* char *yytext: é um apontador para uma cadeia de caracteres 
+                contendo o último item léxico reconhecido
+* int yyleng: comprimento do último item léxico reconhecido
+* FILE *yyin: é o descritor do arquico de entrada que será
+              processado. Por padrão, tem o valor da STDIN.

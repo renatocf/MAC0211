@@ -1,0 +1,15 @@
+PROTÓTIPOS:
+
+Linguagem de Montagem: SOMA
+- Entradas: dois números inteiros (4 bytes cada)
+            colocar os dois números na pilha
+
+Para declarar o protótipo, é necessário escrever:
+    (extern) int soma(int,int);
+no início do arquivo. O extern não será, obrigatoriamente,
+necessário. Ele, provavelmente, buscará onde encontrá-lo.
+
+É necessário ter um label com o nome da função dentro do
+.asm criado em linguagem de montagem.
+
+mov [ebx],55H

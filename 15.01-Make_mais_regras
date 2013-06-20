@@ -1,0 +1,24 @@
+OUTRA FORMA DE DEFINIR MAKES
+
+Uma outra maneitra de criar mekefiles é agrupar os objetos por pré-re-
+quisitos, e não mais pelo alvo gerado. Isso pode ser interessante para
+que possamos facilitar as dependências. Ex:
+
+    main.o utils.o gtk.o: defs.h
+
+EVITANDO PROBLEMAS COM TARGETS
+
+A chamada '.PHONY' evita problemas quando haja arquivos com
+pseudo-comandos em que esse arquivo poderia fazer com que a
+target sem pré-requisito não fosse gerada.
+
+VARIÁVEIS AUTOMÁTICAS
+
+* $^: todos os pré-requisitos
+* $@: o nome da targer
+* $<: o primeiro pré-requiso
+* $?: pré-requisitos mais novos que o arquivo
+* $*: o nome referente ao '%'
+
+O 'make' pode ser utilizado para gerar qualquer tipo de ferramenta,
+inclusive o LaTeX.

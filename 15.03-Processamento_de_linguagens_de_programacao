@@ -1,0 +1,73 @@
+PROCESSAMENTO DE LINGUAGENS DE PROGRAMAÇÃO
+
+* Sintaxe de uma linguagem: especifica como os programas de uma
+                            linguagems são construídos
+* Semântica de uma linguagem: especifica o quê os programas significam
+
+Exemplo: 
+    Suponhamos que as datas são construídas a partir de dígitos re-
+    presentados por D e o símbolo /, da seguinte maneira: DD/DD/DDDD
+    * De acordo com a sintaxe, 01/02/2013 é uma data.
+    * Entretando, no Brasil, pela semântica eles consideram como 01 de 
+      Fevereiro, enquanto nos EUA é 02 de Janeiro (a semântica altera
+      os significados).
+    * Portanto, podemos ter MAIS DE UMA SEMÃNTICA PARA UMA MESMAS SINTAXE
+
+ETAPAS DE UM PROCESSO DE COMPILAÇÃO
+* Análise léxica: responsável por identificar os itens léxicos
+  (palavras, números, símbolos, etc.) no código-fonte do programa;
+* Análise sintática: responsável por identificar a estrutura sintática
+  do programa e construir uma estrutura de dados (normalmente, uma ár-
+  vore sintática) para representar este programa em memória;
+* Análise semântica; responsável por definir o que significa cada
+  comando e gerar o código correspondente.
+
+ANÁLISE LÉXICA
+    Analisa o texto e o separa em itens léxicos ("TOLKIENS") que 
+    auxiliam a, posteriormente, realizar o processamento das pa-
+    lavras conforme o caso. O texto, fica assim, 'quebrado' em 
+    várias partes.
+ANÁLISE SINTÁTICA
+    Criará uma estrutura representando os tolkiens hierarquicamente
+ANÁLISE SEMÃNTICA
+    Representa os diferentes significados a partir da estrutura 
+    para a nálise sintática.
+
+O objetivo desta disciplina é ver um pouco de análise sintática. As
+disciplinas de Linguagens Formais e Autômatos e Compiladores estu-
+dam a parte de análise sintãtica e semântica.
+
+EXPRESSÕES E NOTAÇÕES
+* Expressões como 'a+b*c' são usadas há séculos e foram o ponto de
+  início para o projeto de linguagens de programação.
+* Linguagens de programação usam misto de notações. Por exemplo:
+  - a+b - operador aparece entre os operandos (notação infixa);
+  - sqrt(a) - operador aparece antes do operando (notação prefixa);
+  - a++ - operador aparece depois (notação posfixa);
+
+    NOTAÇÃO INFIXA
+    A notação infixa é vantajosa por ser mais familiar. Porém, ela
+    gera certas ambiguidades de decodificação. Ex:
+    - a*b+c: pode ser a soma de a*b com c ou o produto de a com b+c;
+    
+    Para ajudar na desambiguação, precisamos definir uma PRECEDÊNCIA
+    entre os operadores. Como no caso acima, podemos definir que a 
+    SOMA tem precedência mais baixa que o PRODUTO.
+    
+    Porém, um novo problema aparece. Quando tivermos o mesmo operador
+    várias vezes, podemos usar regras de ASSOCIATIVIDADE. Por exemplo,
+    ao fazer 2-3-5 fazemos a conta a partir da esquerda. Porém, ao 
+    cria uma exponenciação, fazemos ela pela direita: 4^3^2 == 4^9.
+    Podemos definit, também, usando 
+    
+    NOTAÇÃO PREFIXA
+    A notação prefixa é vantajosa porque ao ler da esquerda para a 
+    direita, podemos ter a mesma ordem dos operadores e das variá-
+    veis, como elas devem ser calculadas. Evitamos, então, proble-
+    mas com relação a estas ambiguidades.
+    
+    NOTAÇÃO POSFIXA
+    A notação posfixa, ou notação polonesa reversa, é muito vantajosa.
+    Além de tudo que a notação prefixa tem de vantagem, ela pode ser 
+    realizada com vase em empilhar/desempilar numa pilha, retirando
+    e colocando os elementos conforme os operadores. 

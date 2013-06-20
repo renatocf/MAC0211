@@ -1,0 +1,21 @@
+DEPURANDO PROGRAMAS EM LINGUAGEM DE MONTAGEM
+
+Passo 1: 
+    Inserir a opção -g na linha de comando do GCC, do NASM ou do
+    GAS, para instruí-los a fazer.
+
+Debugadores:
+    $ DDD prog (com interface gráfica)
+    status > registers
+    
+    $ gdb prog 
+    via linha de comando
+    
+Comandos do gdb:
+    l              - lista o programa com as linhas, mostrando 
+                     como elas estão.
+    break 'N'      - cria um breakpoint na linha 'N'.
+    s              - step (avança uma instrução).
+    info registers - mostra o que está armazenado em cada um 
+                     dos registradores.
+    quit           - sai do programa.

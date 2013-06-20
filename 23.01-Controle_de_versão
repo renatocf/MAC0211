@@ -1,0 +1,20 @@
+BOAS PRÁTICAS DE PROGRAMAÇÃO
+
+* Para minimizar conflitos de versão e facilitar o controle histórico,
+recomenda-se que o código de um programa seja submetido sempre que ele
+estiver estável (ou seja, sempre que uma alteração relevante estiver 
+funcionando corretamente).
+* Não se deve submeter um documento ou código para outras pessoas 
+quando ele possa atrapalhar o trabalho de desenvolvimento do projeto
+(por exemplo, código que não compila ou com erro de execução).
+* É importante usar no commor mensagens que descrevam suficientemente 
+a alteração realizada, de modo a evitar que os demas membros do projeto
+precisem consultar o código diretamente para entender a modificação.
+
+LINKS
+* Version control conceps and best practices
+    http://homes.cs.washington.edu/~mernst/advice/version-control.html
+* Manual do Git
+    http://git-scm.com/
+* Um tutorial para git:
+    http://rogerdudler.github.io/git-guide/

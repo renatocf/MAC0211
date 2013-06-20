@@ -1,0 +1,104 @@
+M4
+
+* Foi criado como ferramenta básica para os sistemas UNIX.
+* A entrada do M4 é um texto onde se encontram definições,
+  texto comum e macros que devem ser expandidas
+* Funcionalidades:
+  - Leitura e processamento de texto
+  - Expansão de macros
+  - Macros recursivas
+  - Chamadas ao sistema
+
+* Ex:
+    ENTRADA                        | SAIDA
+    -------------------------------|---------------------                    
+    # Macro simples                | Hello, world.
+    define(`foo',`Hello world.')   | oi, papai
+                                   | Este sou eu.
+    # Macro com parâmetros         |       
+    define(`troca',`$2,$1')        |        
+                                   |
+    # Macro que, apesar de ser     |           
+    # um termo, não se deseja que  |              
+    # seja expandida.              |  
+    define(`eu',`Este sou `eu'.')  |              
+                                   |
+    foo                            |
+    troca(papai,oi)                |
+    eu                             |
+
+* Características
+    - Caracteres `e' são usados para supender uma expansão
+    - Comentários começam com #
+    - Parâmetros passados para a amcro são indicados por
+      números: $1, $2, ...
+    - O número de argumentos é $#
+    - A lista de argumentos é $* (com expansões) ou $@ 
+      (sem expansões)
+
+* Algumas macros especiais
+    - undefine(NOME)
+      Remove macro
+    
+    - defn(NOME) 
+      Mostra o que significa esta macro
+      Ex: define(`batiza',defn(define))
+          Cria 'batiza' na mesma função de 'define'
+    
+    - pushdef(NOME,DEF) e popdef(NOME) 
+      Permitem redefinir macros temporariamente no
+      esquema de uma pilha (uma para cada macro)
+    
+    - ifdef(NOME,STRING1[,STRING2])
+      Se uma macro com nome NOME estiver definida,
+      expande para STRING1 (Opcional: expande para
+      STRING2 no caso contrário). Ex:
+    
+    - efelse(STRING1, STRING2, IGUAL, DIFERENTE)
+      Compara duas strings. SE a comparação for
+      falsa, repete a comparação a partir do 
+      quarto argumento. Se houver apenas 4 pa-
+      râmetros, funciona como um 'if-else' de C
+    
+    - shift
+      Joga o primeiro argumento fora e devolve 
+      os seguintes. Ex:
+      define(`inverte',´ifelse($#,0, , $#,1,``$1'',
+      `inverte(shift($@)),`$1'')')
+      
+      Este é uma macro RECURSIVA, que vai invertendo
+      os argumentos. Primeiro, definimos 'inverte'
+      como um grande ifelse, testando:
+      * Se tivermos 0 ARGUMENTOS, não faz nada;
+      * Se tivermos 1 ARGUMENTO, imprimimos;
+      * Se tiver mais de um argumento, chama o
+        'inverte' com um argumento a menos.
+      
+      O último `$1' é o número de argumentos de 
+      inverte (apenas 1).
+      
+      Simulando o funcionamento:
+      inverte(1,2,3,4)
+      "inverte(2,3,4),1"
+      "inverte(3,4),1,2"
+      "inverte(4),3,2,1"
+      "4,3,2,1"
+          
+    - traceon(...) e traceoff(...) 
+      Para acompanhar a expansão (usado para 
+      depuração). Ele imprime o passo-a-passo 
+      do 'rastro de execução', para sabermos
+      quais (e quantas) chamadas foram feitas.
+      
+      É necessário, porém, usar 'traceon' para
+      todas as macros relacionadas ao comando 
+      que queiramos debugar. 
+      
+      O traceoff faz o M4 não observar mais a
+      macro específica.
+    
+    - dnl
+      Ignora tudo até o final da linha 
+      (comentário de linha), funcionando 
+      também dentro de macros (o que não
+      ocorrem com o '#');
